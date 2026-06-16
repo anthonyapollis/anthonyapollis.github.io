@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Anthony Apollis — Data Engineer & Analytics Specialist. Snowflake · dbt · Python · ML · GA4 · BigQuery.">
+<meta name="description" content="Anthony Apollis — Data Engineer & Analytics Specialist. 12+ years. Snowflake · dbt · Python · ML · GA4 · BigQuery · Airflow · GCP.">
 <meta property="og:title" content="Anthony Apollis — Data Portfolio">
-<meta property="og:description" content="Data Engineer & Analytics Specialist. Snowflake, dbt, Python, ML, GA4.">
+<meta property="og:description" content="Data Engineer & Analytics Specialist. 12+ years. Snowflake, dbt, Python, ML, GA4, GCP, Airflow, Spark.">>
+
 <title>Anthony Apollis — Data Portfolio</title>
 <style>
 :root{
@@ -179,7 +180,7 @@ footer p{font-size:12px;color:var(--muted2)}
       <span class="title">Data Engineer &amp;<br>Analytics Specialist</span>
     </h1>
     <p class="hero-desc">
-      I design and build <strong>end-to-end analytics platforms</strong> — from raw data pipelines through dimensional models to ML models and interactive dashboards. Based in South Africa, working across Snowflake, dbt, Python, and modern BI stacks.
+      I design and build <strong>end-to-end analytics platforms</strong> — from raw data pipelines and GCP medallion architectures through dimensional models, ML, and interactive dashboards. <strong>12+ years</strong> across Snowflake, dbt, BigQuery, Airflow, Apache Spark, and modern BI stacks. Based in South Africa.
     </p>
     <div class="hero-btns">
       <a href="#projects" class="btn-primary">
@@ -193,7 +194,11 @@ footer p{font-size:12px;color:var(--muted2)}
     </div>
     <div class="hero-stats">
       <div class="stat">
-        <div class="n">4+</div>
+        <div class="n">12+</div>
+        <div class="l">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="n">5</div>
         <div class="l">Portfolio Projects</div>
       </div>
       <div class="stat">
@@ -205,8 +210,8 @@ footer p{font-size:12px;color:var(--muted2)}
         <div class="l">ML Models Built</div>
       </div>
       <div class="stat">
-        <div class="n">0.81</div>
-        <div class="l">Best ROC-AUC</div>
+        <div class="n">R10.1M</div>
+        <div class="l">Projected Saving</div>
       </div>
     </div>
   </div>
@@ -390,6 +395,57 @@ footer p{font-size:12px;color:var(--muted2)}
         </div>
       </div>
 
+      <!-- GCP MARKETING ANALYTICS -->
+      <div class="project-card featured fade-in">
+        <div>
+          <div class="project-accent" style="background:linear-gradient(90deg,#4285F4,#34A853)"></div>
+          <p class="project-label">GCP · Medallion Architecture · dbt · Airflow · Apache Beam</p>
+          <h3 class="project-name">GCP Marketing Analytics Platform</h3>
+          <p class="project-desc">Production-grade Google Cloud marketing data platform ingesting GA4, Google Ads, Campaign Manager 360, DV360, and YouTube via BigQuery Data Transfer Service. Raw data flows through a Bronze → Silver → Gold medallion pipeline — Cloud Dataflow (Apache Beam) validates and quarantines, dbt stages and models, Apache Airflow orchestrates the daily DAG.</p>
+          <div class="tags">
+            <span class="tag t-blue">BigQuery</span>
+            <span class="tag t-teal">Cloud Dataflow</span>
+            <span class="tag t-green">Apache Airflow</span>
+            <span class="tag t-purple">dbt</span>
+            <span class="tag t-amber">Apache Beam</span>
+            <span class="tag t-pink">BQ Data Transfer</span>
+            <span class="tag t-red">Python</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/anthonyapollis/GCP-Marketing-Analytics-Platform" class="link-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub Repo
+            </a>
+          </div>
+        </div>
+        <div class="project-metrics">
+          <div class="metric">
+            <div class="mv" style="color:#4285F4">5</div>
+            <div class="ml">Data sources</div>
+          </div>
+          <div class="metric">
+            <div class="mv" style="color:#34A853">3</div>
+            <div class="ml">Medallion layers</div>
+          </div>
+          <div class="metric">
+            <div class="mv" style="color:#FBBC05">5</div>
+            <div class="ml">dbt models</div>
+          </div>
+          <div class="metric">
+            <div class="mv" style="color:#EA4335">Beam</div>
+            <div class="ml">Validation pipeline</div>
+          </div>
+          <div class="metric">
+            <div class="mv" style="color:#0EA5E9">DAG</div>
+            <div class="ml">Airflow orchestration</div>
+          </div>
+          <div class="metric">
+            <div class="mv" style="color:#8B5CF6">Gold</div>
+            <div class="ml">Cross-channel fact</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -403,17 +459,17 @@ footer p{font-size:12px;color:var(--muted2)}
     <h2 class="section-title fade-in">About Me</h2>
     <div class="about-grid">
       <div class="about-text fade-in">
-        <p>I'm a <strong>Data Engineer and Analytics Specialist</strong> based in South Africa, with a background spanning the full analytics stack — from raw data ingestion and warehouse architecture through to machine learning and executive-ready dashboards.</p>
-        <p>My work focuses on building <strong>production-grade data platforms</strong> that serve real business decisions. I enjoy the challenge of turning messy, high-volume datasets into clean, trusted, and insightful products.</p>
-        <p>I'm experienced in <strong>Snowflake, dbt, Python, and SQL</strong> for data engineering, and bring that together with BI tooling, ML libraries, and web-based dashboard development to deliver end-to-end solutions.</p>
-        <p>Currently open to data engineering, analytics engineering, and senior BI roles — locally and internationally.</p>
+        <p>I'm a <strong>Data Engineer and Analytics Specialist</strong> based in South Africa, with <strong>12+ years</strong> spanning the full analytics stack — from raw ingestion and cloud pipeline architecture through dimensional modelling, machine learning, and executive-ready dashboards.</p>
+        <p>My work focuses on building <strong>production-grade data platforms</strong> that serve real business decisions. I enjoy turning messy, high-volume datasets into clean, trusted, and insightful products — whether that's a Snowflake star schema, a GCP medallion pipeline, or a trained ensemble ML model.</p>
+        <p>Cloud-native experience includes <strong>BigQuery, Cloud Dataflow (Apache Beam), Apache Airflow, dbt, Apache Spark / PySpark, and BigQuery Data Transfer Service</strong> — alongside Snowflake, SQL Server, Power BI, and Tableau from enterprise BI roles.</p>
+        <p>Currently open to Data Engineering, Analytics Engineering, and Senior BI roles — locally and internationally.</p>
       </div>
       <div class="about-card-stack fade-in">
         <div class="about-card">
           <div class="about-icon" style="background:rgba(59,130,246,.15)">🏗️</div>
           <div>
             <h4>Data Engineering</h4>
-            <p>Snowflake DWH design, dbt transformations, Python pipelines, dimensional modelling (star schema, SCD Type 2)</p>
+            <p>Snowflake &amp; BigQuery DWH design, dbt transformations, Airflow DAGs, Cloud Dataflow (Apache Beam), Spark/PySpark, Apache NiFi, dimensional modelling (star schema, SCD Type 2)</p>
           </div>
         </div>
         <div class="about-card">
@@ -469,7 +525,9 @@ footer p{font-size:12px;color:var(--muted2)}
           <span class="skill-pill">SQL</span>
           <span class="skill-pill">Python (Pandas)</span>
           <span class="skill-pill">ETL / ELT</span>
+          <span class="skill-pill">Medallion Architecture</span>
           <span class="skill-pill">Data Cleaning</span>
+          <span class="skill-pill">SSIS</span>
         </div>
       </div>
       <div class="skill-group fade-in">
@@ -505,12 +563,17 @@ footer p{font-size:12px;color:var(--muted2)}
         </div>
       </div>
       <div class="skill-group fade-in">
-        <h4>Engineering &amp; DevOps</h4>
+        <h4>Cloud &amp; Orchestration</h4>
         <div class="skill-pills">
+          <span class="skill-pill">Apache Airflow</span>
+          <span class="skill-pill">Cloud Dataflow</span>
+          <span class="skill-pill">Apache Beam</span>
+          <span class="skill-pill">BQ Data Transfer</span>
+          <span class="skill-pill">Apache Spark</span>
+          <span class="skill-pill">PySpark</span>
+          <span class="skill-pill">Apache NiFi</span>
           <span class="skill-pill">Python</span>
           <span class="skill-pill">Git / GitHub</span>
-          <span class="skill-pill">Apache NiFi</span>
-          <span class="skill-pill">CSV / Parquet</span>
           <span class="skill-pill">REST APIs</span>
         </div>
       </div>
