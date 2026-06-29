@@ -180,7 +180,7 @@ footer p{font-size:12px;color:var(--muted2)}
       <span class="title">Data Engineer &amp;<br>Analytics Specialist</span>
     </h1>
     <p class="hero-desc">
-      I design and build <strong>end-to-end analytics platforms</strong> — from raw data pipelines and GCP medallion architectures through dimensional models, ML, and interactive dashboards. <strong>12+ years</strong> across Snowflake, dbt, BigQuery, Airflow, Apache Spark, and modern BI stacks. Based in South Africa.
+      I design and build <strong>end-to-end analytics platforms</strong> — from raw data pipelines and GCP/AWS data lake architectures through dimensional models, ML, and interactive dashboards. <strong>12+ years</strong> across Snowflake, dbt, BigQuery, AWS S3/Glue/Athena, Airflow, Apache Spark, and modern BI stacks. Based in South Africa.
     </p>
     <div class="hero-btns">
       <a href="#projects" class="btn-primary">
@@ -190,6 +190,10 @@ footer p{font-size:12px;color:var(--muted2)}
       <a href="mailto:anthony.apollis@gmail.com" class="btn-ghost">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
         Get in Touch
+      </a>
+      <a href="assets/Anthony_Apollis_Resume_02062026.docx" class="btn-ghost" download>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
       </a>
     </div>
     <div class="hero-stats">
@@ -366,49 +370,17 @@ footer p{font-size:12px;color:var(--muted2)}
         </div>
       </div>
 
-      <!-- GA4 -->
-      <div class="project-card fade-in">
-        <div class="project-accent" style="background:linear-gradient(90deg,#10B981,#0EA5E9)"></div>
-        <p class="project-label">Web Analytics · BigQuery · GTM</p>
-        <h3 class="project-name">GA4 Analytics Portfolio</h3>
-        <p class="project-desc">Full Google Analytics 4 implementation showcase covering event tracking, BigQuery exports, datalayer architecture, ecommerce funnel analysis, and consent mode quality validation — with SQL query library and GTM templates.</p>
-        <div class="project-metrics" style="margin-bottom:16px">
-          <div class="metric">
-            <div class="mv" style="color:#10B981">7</div>
-            <div class="ml">SQL queries</div>
-          </div>
-          <div class="metric">
-            <div class="mv" style="color:#0EA5E9">GA4</div>
-            <div class="ml">Platform</div>
-          </div>
-          <div class="metric">
-            <div class="mv" style="color:#3B82F6">GTM</div>
-            <div class="ml">Implementation</div>
-          </div>
-        </div>
-        <div class="tags">
-          <span class="tag t-green">GA4</span>
-          <span class="tag t-blue">BigQuery</span>
-          <span class="tag t-teal">GTM</span>
-          <span class="tag t-amber">SQL</span>
-          <span class="tag t-purple">Consent Mode</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/anthonyapollis" class="link-btn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- GCP MARKETING ANALYTICS -->
+      <!-- GCP MARKETING ANALYTICS (combined with GA4) -->
       <div class="project-card featured fade-in">
         <div>
-          <div class="project-accent" style="background:linear-gradient(90deg,#4285F4,#34A853)"></div>
-          <p class="project-label">GCP · Medallion Architecture · dbt · Airflow · Apache Beam</p>
+          <div class="project-accent" style="background:linear-gradient(90deg,#4285F4,#10B981,#FBBC05)"></div>
+          <p class="project-label">GCP · GA4 · GTM · Medallion Architecture · dbt · Airflow · Apache Beam</p>
           <h3 class="project-name">GCP Marketing Analytics Platform</h3>
-          <p class="project-desc">Production-grade Google Cloud marketing data platform ingesting GA4, Google Ads, Campaign Manager 360, DV360, and YouTube via BigQuery Data Transfer Service. Raw data flows through a Bronze → Silver → Gold medallion pipeline — Cloud Dataflow (Apache Beam) validates and quarantines, dbt stages and models, Apache Airflow orchestrates the daily DAG.</p>
+          <p class="project-desc">End-to-end Google Cloud marketing analytics platform: GA4 implementation with GTM datalayer architecture, consent mode quality validation, and a 7-query BigQuery SQL library — feeding into a production medallion pipeline ingesting GA4, Google Ads, Campaign Manager 360, DV360, and YouTube via BigQuery Data Transfer Service. Cloud Dataflow (Apache Beam) validates and quarantines, dbt stages and models, Apache Airflow orchestrates the daily DAG to a cross-channel Gold fact table.</p>
           <div class="tags">
+            <span class="tag t-green">GA4</span>
+            <span class="tag t-teal">GTM</span>
+            <span class="tag t-purple">Consent Mode</span>
             <span class="tag t-blue">BigQuery</span>
             <span class="tag t-teal">Cloud Dataflow</span>
             <span class="tag t-green">Apache Airflow</span>
@@ -430,11 +402,15 @@ footer p{font-size:12px;color:var(--muted2)}
             <div class="ml">Data sources</div>
           </div>
           <div class="metric">
-            <div class="mv" style="color:#34A853">3</div>
-            <div class="ml">Medallion layers</div>
+            <div class="mv" style="color:#10B981">GA4</div>
+            <div class="ml">+ GTM impl.</div>
           </div>
           <div class="metric">
-            <div class="mv" style="color:#FBBC05">5</div>
+            <div class="mv" style="color:#FBBC05">7+</div>
+            <div class="ml">SQL queries</div>
+          </div>
+          <div class="metric">
+            <div class="mv" style="color:#8B5CF6">5</div>
             <div class="ml">dbt models</div>
           </div>
           <div class="metric">
@@ -442,11 +418,7 @@ footer p{font-size:12px;color:var(--muted2)}
             <div class="ml">Validation pipeline</div>
           </div>
           <div class="metric">
-            <div class="mv" style="color:#0EA5E9">DAG</div>
-            <div class="ml">Airflow orchestration</div>
-          </div>
-          <div class="metric">
-            <div class="mv" style="color:#8B5CF6">Gold</div>
+            <div class="mv" style="color:#0EA5E9">Gold</div>
             <div class="ml">Cross-channel fact</div>
           </div>
         </div>
@@ -468,7 +440,7 @@ footer p{font-size:12px;color:var(--muted2)}
         <p>I'm a <strong>Data Engineer, Data Architect, and Analytics Specialist</strong> based in South Africa, with <strong>12+ years</strong> spanning the full analytics stack — from raw ingestion and cloud pipeline architecture through dimensional modelling, machine learning, and executive-ready dashboards.</p>
         <p>My work focuses on building <strong>production-grade data platforms</strong> that serve real business decisions. I enjoy turning messy, high-volume datasets into clean, trusted, and insightful products — whether that's a Snowflake star schema, a GCP medallion pipeline, a Databricks lakehouse, or a trained ensemble ML model.</p>
         <p>I design data architecture from scratch: source-to-target flows, Bronze/Silver/Gold layers, dimensional marts, SCD Type 2 history, data-quality quarantine patterns, orchestration, and BI-ready semantic layers.</p>
-        <p>Cloud-native experience includes <strong>BigQuery, Databricks, Delta Lake, Cloud Dataflow (Apache Beam), Apache Airflow, dbt, Apache Spark / PySpark, and BigQuery Data Transfer Service</strong> — alongside Snowflake, SQL Server, PostgreSQL, Microsoft Fabric, Power BI, and Tableau from enterprise BI roles.</p>
+        <p>Cloud-native experience includes <strong>BigQuery, Databricks, Delta Lake, Cloud Dataflow (Apache Beam), Apache Airflow, dbt, Apache Spark / PySpark, AWS Lambda, Amazon S3, AWS Glue, Lake Formation, Athena, and QuickSight</strong> — alongside Snowflake, SQL Server, PostgreSQL, Microsoft Fabric, Power BI, and Tableau from enterprise BI roles.</p>
         <p>Currently open to Data Engineering, Data Architecture, Analytics Engineering, and Senior BI roles — locally and internationally.</p>
       </div>
       <div class="about-card-stack fade-in">
@@ -483,7 +455,7 @@ footer p{font-size:12px;color:var(--muted2)}
           <div class="about-icon" style="background:rgba(59,130,246,.15)">🏗️</div>
           <div>
             <h4>Data Engineering</h4>
-            <p>Snowflake &amp; BigQuery DWH design, Databricks/Delta pipelines, dbt transformations, Airflow DAGs, Cloud Dataflow (Apache Beam), Spark/PySpark, Apache NiFi</p>
+            <p>Snowflake &amp; BigQuery DWH design, Databricks/Delta pipelines, AWS S3 data lakes, AWS Glue ETL/catalogue, Athena reporting datasets, dbt transformations, Airflow DAGs, Cloud Dataflow (Apache Beam), Spark/PySpark, Apache NiFi, dimensional modelling (star schema, SCD Type 2)</p>
           </div>
         </div>
         <div class="about-card">
@@ -528,6 +500,7 @@ footer p{font-size:12px;color:var(--muted2)}
           <span class="skill-pill">SQL Server</span>
           <span class="skill-pill">PostgreSQL</span>
           <span class="skill-pill">BigQuery</span>
+          <span class="skill-pill">Data Architecture</span>
           <span class="skill-pill">Star Schema</span>
           <span class="skill-pill">SCD Type 2</span>
           <span class="skill-pill">Dimensional Modelling</span>
@@ -610,6 +583,13 @@ footer p{font-size:12px;color:var(--muted2)}
           <span class="skill-pill">Microsoft Fabric</span>
           <span class="skill-pill">OneLake</span>
           <span class="skill-pill">Direct Lake</span>
+          <span class="skill-pill">AWS Lambda</span>
+          <span class="skill-pill">Amazon S3</span>
+          <span class="skill-pill">AWS Glue</span>
+          <span class="skill-pill">Glue Data Catalog</span>
+          <span class="skill-pill">Lake Formation</span>
+          <span class="skill-pill">Amazon Athena</span>
+          <span class="skill-pill">Amazon QuickSight</span>
           <span class="skill-pill">Apache Airflow</span>
           <span class="skill-pill">Cloud Dataflow</span>
           <span class="skill-pill">Apache Beam</span>
@@ -646,7 +626,7 @@ footer p{font-size:12px;color:var(--muted2)}
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
           github.com/anthonyapollis
         </a>
-        <a href="https://www.linkedin.com/in/anthonyapollis" class="contact-link" target="_blank" rel="noopener">
+        <a href="https://www.linkedin.com/in/anthony-apollis/" class="contact-link" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           LinkedIn Profile
         </a>
