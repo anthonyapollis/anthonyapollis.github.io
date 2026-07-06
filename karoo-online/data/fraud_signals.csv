@@ -1,0 +1,7 @@
+signal,customers_flagged,pct_of_base
+ML anomaly (IsolationForest),4000,2.0
+Rapid-order velocity,0,0.0
+Return abuse (wardrobing),75,0.04
+Multi-province shipping,187204,93.6
+High-value outlier,200,0.1
+2+ risk flags (review queue),205,0.1

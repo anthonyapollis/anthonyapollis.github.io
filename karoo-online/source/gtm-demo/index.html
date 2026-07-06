@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Karoo Online — GTM Tracking Demo</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #FBF3EC; color: #2B2118; margin: 0; }
+  header { background: #2B2118; color: #F5E9DC; padding: 18px 28px; }
+  header h1 { margin: 0; font-size: 20px; color: #E0A526; letter-spacing: 1px; }
+  header p { margin: 4px 0 0; font-size: 12px; color: #C9BBA8; }
+  main { max-width: 760px; margin: 0 auto; padding: 22px; }
+  .funnel-step { background: white; border: 1px solid #E5D8CC; border-radius: 10px;
+                 padding: 16px 20px; margin-bottom: 12px; opacity: 0.4; transition: opacity .25s; }
+  .funnel-step.active { opacity: 1; border-color: #C0531F; box-shadow: 0 0 0 2px #C0531F22; }
+  .funnel-step.done { opacity: 0.75; border-color: #6B8E5A; }
+  .funnel-step h3 { margin: 0 0 6px; color: #C0531F; font-size: 15px; }
+  .event-name { font-family: Consolas, monospace; font-size: 11px; color: #7A4A2B;
+                background: #FDF6E3; padding: 2px 8px; border-radius: 4px; }
+  button { background: #C0531F; color: white; border: none; padding: 9px 18px; border-radius: 6px;
+           font-size: 14px; cursor: pointer; margin-top: 8px; }
+  button:disabled { background: #D9C3B0; cursor: not-allowed; }
+  #log { background: #1E1611; color: #F5E9DC; font-family: Consolas, monospace; font-size: 12px;
+         padding: 16px; border-radius: 10px; margin-top: 20px; max-height: 300px; overflow-y: auto;
+         white-space: pre-wrap; }
+  #log .tag { color: #E0A526; }
+  .item-card { display: flex; justify-content: space-between; align-items: center; }
+  .price { font-weight: bold; color: #C0531F; }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager container snippet (placeholder ID GTM-KAROO01) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtm_push(obj){ obj._pushed_at = new Date().toISOString(); dataLayer.push(obj); logEvent(obj); }
+</script>
+<header>
+  <h1>KAROO ONLINE</h1>
+  <p>Google Tag Manager demo — click the funnel; watch each dataLayer event fire (as GTM would capture it)</p>
+</header>
+<main>
+  <div class="funnel-step active" id="s-view">
+    <div class="item-card">
+      <div><h3>1 · Product View</h3><span class="event-name">view_item</span></div>
+      <div style="text-align:right">Cordless Drill — Electronics<br><span class="price">R 899.00</span></div>
+    </div>
+    <button onclick="viewItem()">View Product</button>
+  </div>
+  <div class="funnel-step" id="s-cart"><h3>2 · Add to Cart</h3><span class="event-name">add_to_cart</span><br>
+    <button onclick="addCart()" disabled>Add to Cart</button></div>
+  <div class="funnel-step" id="s-checkout"><h3>3 · Begin Checkout</h3><span class="event-name">begin_checkout</span><br>
+    <button onclick="beginCheckout()" disabled>Begin Checkout</button></div>
+  <div class="funnel-step" id="s-purchase"><h3>4 · Purchase</h3><span class="event-name">purchase</span><br>
+    <button onclick="purchase()" disabled>Complete Purchase</button></div>
+  <div id="log">// GTM dataLayer events appear here as they fire\n</div>
+</main>
+<script>
+  const ITEM = { item_id:"SKU-1042", item_name:"Cordless Drill", item_category:"Electronics", price:899.00, currency:"ZAR" };
+  function logEvent(obj){
+    const el=document.getElementById("log");
+    el.innerHTML += `\n<span class="tag">dataLayer.push</span>(${JSON.stringify(obj,null,2)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")})\n`;
+    el.scrollTop = el.scrollHeight;
+  }
+  function step(done,next){ document.getElementById(done).classList.replace('active','done');
+    if(next){ const n=document.getElementById(next); n.classList.add('active'); n.querySelector('button').disabled=false; } }
+  function viewItem(){ gtm_push({event:"view_item",ecommerce:{items:[ITEM]}}); step('s-view','s-cart'); }
+  function addCart(){ gtm_push({event:"add_to_cart",ecommerce:{items:[ITEM],value:ITEM.price}}); step('s-cart','s-checkout'); }
+  function beginCheckout(){ gtm_push({event:"begin_checkout",ecommerce:{items:[ITEM],value:ITEM.price,currency:"ZAR"}}); step('s-checkout','s-purchase'); }
+  function purchase(){ gtm_push({event:"purchase",ecommerce:{transaction_id:"T"+Math.floor(Math.random()*100000),value:ITEM.price,currency:"ZAR",items:[ITEM]}});
+    const b=document.querySelector('#s-purchase button'); b.disabled=true; b.textContent="✓ Purchased"; document.getElementById('s-purchase').classList.replace('active','done'); }
+  window.addEventListener("DOMContentLoaded",()=>{ gtm_push({event:"session_start",session_id:"sess_"+Math.random().toString(36).slice(2,10)});
+    gtm_push({event:"page_view",page_path:"/product/cordless-drill"}); });
+</script>
+</body>
+</html>

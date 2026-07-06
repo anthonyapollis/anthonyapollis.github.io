@@ -1,0 +1,37 @@
+brand,products,category,units_sold,revenue,avg_rating,avg_return_pct
+Veld,5,Garden & Pool,1004777,732669168.0,4.42,5.35
+Hearth,5,Home & Kitchen,1035669,407885113.0,4.5,6.44
+Voltiq,5,Automotive,1096126,372220360.0,4.36,8.31
+SpeedToy,3,Toys,984521,261192751.0,4.53,4.86
+SonicWave,3,Electronics,456333,260704478.0,4.3,8.85
+Stride,3,Fashion,1105500,229526382.0,4.13,8.64
+LittleOnes,4,Baby,366384,189152381.0,4.5,5.8
+FlexFit,2,Sport & Outdoor,683402,181470704.0,4.65,7.14
+DriveLux,3,Automotive,621753,166339293.0,4.33,7.85
+Nexa,2,Electronics,279394,161800129.0,4.6,6.04
+PawNutrition,5,Pet Supplies,750156,150109297.0,4.5,3.21
+Cape Press,6,Books,1412354,139632668.0,4.57,1.69
+GlowUp,4,Beauty,794192,135908977.0,4.53,4.23
+Vortex,2,Electronics,117414,122782216.0,4.4,9.93
+Karoo Pantry,6,Groceries,708163,118999003.0,4.6,0.77
+TorqueX,4,Automotive,432415,115429778.0,4.2,8.43
+Whiskers,5,Pet Supplies,669951,104241445.0,4.68,2.31
+TenderCare,3,Baby,794979,103302221.0,4.17,7.67
+ChefPro,5,Home & Kitchen,196941,87947053.0,4.6,5.02
+Lumière,4,Beauty,544397,77509935.0,4.58,3.7
+Kalahari Co.,3,Fashion,148704,75885311.0,4.13,13.03
+GreenThumb,3,Garden & Pool,236990,69641085.0,4.53,4.83
+TinyTots,3,Baby,249882,66163193.0,4.37,6.68
+PlayLand,4,Toys,168911,60291094.0,4.68,5.17
+Bloom,3,Fashion,140774,50428960.0,3.77,17.77
+Kaya,3,Garden & Pool,53407,41576852.0,4.67,4.05
+AquaLife,3,Garden & Pool,142683,40146501.0,4.5,5.12
+IronCore,1,Sport & Outdoor,92540,38844138.0,4.1,5.3
+Mindful,2,Books,550561,37565146.0,4.7,1.52
+Bean Co.,4,Groceries,393596,36859123.0,4.57,1.17
+Raptor,1,Electronics,55056,30900072.0,4.2,10.54
+Everyday,3,Fashion,230895,25813960.0,3.73,19.04
+Little Reader,2,Books,256824,16243200.0,4.55,1.78
+Trailblaze,1,Sport & Outdoor,13535,13928037.0,4.6,4.33
+GroomKing,2,Beauty,74612,10448393.0,4.5,3.32
+FunBox,3,Toys,71741,7950809.0,4.37,4.4

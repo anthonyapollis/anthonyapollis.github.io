@@ -1,0 +1,20 @@
+{
+  "event": "2026 Strait of Hormuz Crisis",
+  "event_dates": "28 Feb - late Jun 2026 (US-Iran deal ~29 Jun 2026)",
+  "status": "Resolved by end-June 2026; Brent eased back toward $70",
+  "analysis_window": "January 2025 - June 2026 (18 months)",
+  "note_2025": "A minor June-2025 12-Day War caused only a brief ~$76 blip",
+  "baseline_brent": 70,
+  "peak_brent": 120,
+  "peak_intraday": 126,
+  "peak_shock_pct": 71,
+  "peak_month": "2026-03",
+  "crisis_months": "Feb-Jun 2026",
+  "revenue_lost": 13101200,
+  "extra_delivery": 1616773,
+  "margin_hit": 14717973,
+  "months_affected": 13,
+  "peak_delivery_cost": 55.5,
+  "worst_category": "Electronics",
+  "worst_category_drop": 15.7
+}

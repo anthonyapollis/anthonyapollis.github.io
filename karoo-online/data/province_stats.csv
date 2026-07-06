@@ -1,0 +1,10 @@
+province,orders,revenue,on_time_pct,avg_delivery_days,customers,top_category,revenue_share_pct
+Gauteng,3401965,1613608457.0,72.1,2.9,788536,Electronics,34.0
+Western Cape,2199032,1042578595.0,72.1,2.9,748788,Electronics,22.0
+KwaZulu-Natal,1599625,758958789.0,72.1,2.9,692055,Electronics,16.0
+Eastern Cape,698569,330368654.0,32.2,4.7,465615,Electronics,7.0
+Free State,500813,237270789.0,32.3,4.7,372248,Electronics,5.0
+Mpumalanga,500077,237177151.0,32.1,4.7,371563,Electronics,5.0
+Limpopo,399512,189812243.0,32.3,4.7,314554,Electronics,4.0
+North West,400184,189252783.0,32.3,4.7,314903,Electronics,4.0
+Northern Cape,300223,142481762.0,32.3,4.7,250333,Electronics,3.0

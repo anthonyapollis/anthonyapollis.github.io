@@ -1,0 +1,6 @@
+signal,flagged,captures_real_fraud
+ML anomaly (IsolationForest),1600,1046
+Return abuse >30%,3037,1067
+High velocity (top 2%),908,908
+Ships to 6+ provinces,1872,1136
+Review queue (2+ signals),1220,1114

@@ -1,0 +1,46 @@
+antecedent,consequent,pair_customers,confidence,lift
+Automotive,Sport & Outdoor,29989,0.72,1.381
+Electronics,Sport & Outdoor,29843,0.72,1.38
+Automotive,Electronics,29781,0.715,1.379
+Baby & Kids,Toys & Games,23240,0.681,1.285
+Baby & Kids,Fashion,23953,0.702,1.235
+Fashion,Home & Kitchen,36717,0.807,1.198
+Home & Kitchen,Toys & Games,33862,0.629,1.185
+Beauty & Health,Home & Kitchen,32893,0.793,1.177
+Baby & Kids,Home & Kitchen,26217,0.769,1.142
+Books,Sport & Outdoor,23511,0.58,1.112
+Books,Electronics,23339,0.576,1.111
+Automotive,Books,23420,0.562,1.109
+Beauty & Health,Pet Supplies,24470,0.59,1.109
+Fashion,Toys & Games,26155,0.575,1.084
+Beauty & Health,Fashion,25251,0.609,1.07
+Pet Supplies,Sport & Outdoor,23365,0.549,1.053
+Fashion,Pet Supplies,25471,0.56,1.052
+Electronics,Pet Supplies,23178,0.559,1.051
+Automotive,Pet Supplies,23281,0.559,1.051
+Beauty & Health,Books,21963,0.529,1.044
+Books,Toys & Games,22163,0.547,1.031
+Beauty & Health,Toys & Games,22382,0.539,1.017
+Home & Kitchen,Pet Supplies,27781,0.516,0.97
+Books,Home & Kitchen,25258,0.623,0.925
+Baby & Kids,Books,14451,0.424,0.836
+Baby & Kids,Beauty & Health,14762,0.433,0.835
+Automotive,Baby & Kids,14694,0.353,0.827
+Baby & Kids,Sport & Outdoor,14689,0.431,0.826
+Baby & Kids,Pet Supplies,14936,0.438,0.823
+Baby & Kids,Electronics,14529,0.426,0.822
+Beauty & Health,Electronics,16797,0.405,0.781
+Books,Pet Supplies,16802,0.414,0.779
+Beauty & Health,Sport & Outdoor,16812,0.405,0.777
+Automotive,Beauty & Health,16799,0.403,0.777
+Sport & Outdoor,Toys & Games,17059,0.409,0.771
+Automotive,Toys & Games,17047,0.409,0.771
+Electronics,Toys & Games,16939,0.408,0.77
+Pet Supplies,Toys & Games,17294,0.406,0.766
+Books,Fashion,17626,0.435,0.764
+Electronics,Fashion,17787,0.429,0.754
+Fashion,Sport & Outdoor,17891,0.393,0.754
+Automotive,Fashion,17853,0.429,0.753
+Automotive,Home & Kitchen,20081,0.482,0.716
+Home & Kitchen,Sport & Outdoor,20103,0.373,0.716
+Electronics,Home & Kitchen,19949,0.481,0.714

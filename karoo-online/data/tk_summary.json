@@ -1,0 +1,19 @@
+{
+  "n_products": 1000,
+  "n_priced": 1000,
+  "pct_priced": 100,
+  "price_min": 25,
+  "price_max": 53451,
+  "price_median": 492,
+  "price_mean": 1368,
+  "n_branded": 263,
+  "pct_branded": 26,
+  "n_brands": 156,
+  "avg_images": 7.5,
+  "pct_desc": 100,
+  "n_categories": 12,
+  "top_category": "General Merchandise",
+  "pct_in_stock": 17,
+  "pct_lead_time": 59,
+  "pct_no_offer": 21
+}

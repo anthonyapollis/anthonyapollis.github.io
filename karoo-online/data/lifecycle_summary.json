@@ -1,0 +1,13 @@
+{
+  "customers": 80000,
+  "churn_rate_pct": 15.8,
+  "avg_clv": 37201,
+  "median_clv": 22317,
+  "total_clv_bn": 2.98,
+  "champions_clv": 39,
+  "at_risk_customers": 3682,
+  "at_risk_revenue": 36,
+  "avg_lifespan_months": 7.2,
+  "m1_retention": 86.0,
+  "m6_retention": 49.0
+}

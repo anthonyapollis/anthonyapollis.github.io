@@ -1,0 +1,13 @@
+category,products,priced,median_price,avg_price,avg_images,avg_desc_len
+General Merchandise,355,355,513.0,1509.8,6.8,1007.6
+Home & Kitchen,214,214,592.0,1202.2,6.2,962.2
+Electronics,168,168,424.5,2137.9,9.0,1348.3
+Fashion,61,61,611.0,910.6,16.7,919.8
+Beauty & Health,45,45,346.0,419.1,7.3,972.5
+Tools & DIY,31,31,547.0,1015.4,4.4,786.5
+Sport & Outdoor,29,29,533.0,979.1,6.9,923.3
+Toys & Games,27,27,386.0,670.3,6.6,743.8
+Stationery & Office,26,26,395.5,1187.6,5.3,980.0
+Automotive,23,23,529.0,683.9,6.4,916.4
+Pet Supplies,17,17,253.0,875.6,4.7,676.8
+Baby & Kids,4,4,548.0,541.8,5.5,696.2

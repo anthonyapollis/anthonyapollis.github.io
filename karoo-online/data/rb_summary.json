@@ -1,0 +1,15 @@
+{
+  "n_orders": 1015703,
+  "n_customers": 80000,
+  "true_fraud": 1136,
+  "fraud_pct": 1.42,
+  "iso_precision": 0.654,
+  "iso_recall": 0.921,
+  "corr_discount_qty": 0.365,
+  "corr_late_return": 0.176,
+  "corr_metro_delivery": -0.628,
+  "top_rule": "Automotive + Sport & Outdoor",
+  "top_lift": 1.381,
+  "review_queue": 1220,
+  "review_queue_fraud": 1114
+}

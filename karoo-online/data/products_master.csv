@@ -1,0 +1,121 @@
+product_id,product_name,brand,category,tier,unit_price,units_sold,revenue,return_pct,avg_rating,discount_pct
+KP1016,Lawn Mower Electric,Veld,Garden & Pool,premium,1036.24,491268,487562347.0,2.31,4.6,4.2
+KP1046,Vacuum Cleaner Bagless,Hearth,Home & Kitchen,premium,809.21,343021,272198607.0,3.15,4.7,1.9
+KP1067,Kids Scooter 3-Wheel,SpeedToy,Toys,mid,283.44,942667,251599383.0,5.02,4.6,5.8
+KP1002,Wireless Earbuds Pro,SonicWave,Electronics,mid,591.77,368108,207300603.0,11.76,4.1,4.8
+KP1027,Sleeping Bag -5°C,Veld,Sport & Outdoor,mid,472.67,414847,190461236.0,6.18,4.4,2.9
+KP1032,Dash Cam Full HD,Voltiq,Automotive,mid,380.29,442541,153738560.0,7.69,4.3,8.6
+KP1072,Running Sneakers,Stride,Fashion,mid,195.24,727781,132362446.0,10.83,3.9,6.8
+KP1051,Baby Stroller 3-in-1,LittleOnes,Baby,premium,634.3,213049,130180013.0,6.53,4.2,3.7
+KP1007,Smartwatch Fit,Nexa,Electronics,mid,538.88,234806,115572908.0,6.37,4.5,8.7
+KP1004,"Laptop 15"" i5",Vortex,Electronics,premium,1083.01,109899,113691415.0,11.07,4.3,4.5
+KP1005,Power Bank 20000mAh,Voltiq,Electronics,budget,260.27,441093,109104881.0,10.4,4.3,5.0
+KP1094,Makeup Palette,GlowUp,Beauty,mid,173.98,661166,108410244.0,3.65,4.4,5.8
+KP1023,Yoga Mat Pro,FlexFit,Sport & Outdoor,budget,231.33,506019,107386294.0,8.52,4.6,8.3
+KP1050,Storage Container Set,Hearth,Home & Kitchen,budget,181.83,577730,98147099.0,6.58,4.3,6.6
+KP1056,Feeding Bottle Set,TenderCare,Baby,budget,135.27,723330,91696809.0,8.57,4.3,6.3
+KP1087,Pet Carrier,PawNutrition,Pet Supplies,mid,224.97,421953,86033726.0,2.96,4.5,9.4
+KP1116,Chocolate Gift Hamper,Karoo Pantry,Groceries,premium,278.5,321035,84054307.0,0.55,4.6,6.0
+KP1040,Windscreen Sun Shade,DriveLux,Automotive,budget,200.67,430079,78192846.0,7.6,4.4,9.4
+KP1090,Fish Tank Filter,Whiskers,Pet Supplies,mid,181.82,436364,75760699.0,1.63,4.6,4.5
+KP1029,Fitness Tracker Band,FlexFit,Sport & Outdoor,mid,427.48,177383,74084410.0,5.76,4.7,2.3
+KP1028,Football Match Ball,Stride,Sport & Outdoor,budget,248.4,318128,72583337.0,8.77,4.2,8.1
+KP1034,Car Seat Cover Set,DriveLux,Automotive,mid,464.51,171937,72060097.0,8.04,4.3,9.8
+KP1110,Travel Guide SA,Cape Press,Books,budget,84.26,873135,71881425.0,1.15,4.7,2.3
+KP1031,Car Battery 12V,TorqueX,Automotive,mid,460.57,138212,61046610.0,5.59,4.2,4.1
+KP1036,Jump Starter Kit,Voltiq,Automotive,premium,836.37,71977,58014204.0,5.08,4.5,3.6
+KP1076,Winter Coat Puffer,Kalahari Co.,Fashion,premium,548.55,100457,54034100.0,8.08,4.4,1.9
+KP1060,Highchair Foldable,TinyTots,Baby,mid,322.53,156050,48771109.0,4.22,4.4,3.1
+KP1003,Bluetooth Speaker,SonicWave,Electronics,mid,595.11,84161,48303516.0,10.21,4.2,3.6
+KP1081,Dog Food 15kg,PawNutrition,Pet Supplies,mid,208.31,242002,46843813.0,3.24,4.4,7.1
+KP1006,Smartphone A54,Nexa,Electronics,premium,1074.18,44588,46227221.0,5.72,4.7,3.5
+KP1039,LED Headlight Kit,Voltiq,Automotive,mid,403.21,121590,46129788.0,9.13,4.4,5.9
+KP1049,Blender 1000W,ChefPro,Home & Kitchen,mid,437.46,111721,44568382.0,6.47,4.4,8.8
+KP1108,Biography Bestseller,Cape Press,Books,mid,152.04,301249,41302731.0,2.24,4.5,9.8
+KP1014,Garden Hose 30m,GreenThumb,Garden & Pool,budget,267.12,162429,40917137.0,4.41,4.5,5.7
+KP1024,Dumbbell Set 20kg,IronCore,Sport & Outdoor,mid,463.83,92540,38844138.0,5.3,4.1,9.5
+KP1077,Handbag Tote,Bloom,Fashion,premium,462.15,86265,38030802.0,18.34,3.8,4.6
+KP1069,STEM Robot Kit,PlayLand,Toys,premium,598.84,59100,34759793.0,5.62,4.6,1.8
+KP1009,Gaming Mouse,Raptor,Electronics,mid,579.31,55056,30900072.0,10.54,4.2,3.1
+KP1057,Baby Carrier Ergo,LittleOnes,Baby,mid,311.28,100071,29199593.0,6.07,4.3,6.3
+KP1019,Gazebo 3x3m,Kaya,Garden & Pool,premium,1085.11,25281,26745593.0,3.05,4.7,2.5
+KP1026,Hiking Backpack 60L,Veld,Sport & Outdoor,premium,876.43,31944,26550476.0,5.85,4.6,5.2
+KP1091,Perfume Eau de Parfum,Lumière,Beauty,premium,351.13,76844,26443703.0,3.93,4.9,2.0
+KP1035,Engine Oil 5W-40 5L,TorqueX,Automotive,budget,183.14,148945,26231187.0,8.23,4.4,3.8
+KP1048,Dinner Set 16pc,Hearth,Home & Kitchen,mid,414.54,64464,25347297.0,6.53,4.4,5.1
+KP1055,Cot Bed Convertible,LittleOnes,Baby,premium,589.27,45509,25274297.0,5.47,4.9,5.8
+KP1100,Body Lotion Set,Lumière,Beauty,budget,95.91,286085,25019485.0,3.92,4.5,8.8
+KP1025,Running Shoes Trail,Stride,Sport & Outdoor,mid,432.61,59591,24580599.0,6.31,4.3,4.7
+KP1022,Camping Tent 4-Man,Veld,Sport & Outdoor,mid,443.76,57731,23895575.0,6.65,4.1,6.7
+KP1020,Garden Tool Set,GreenThumb,Garden & Pool,mid,494.2,49050,23363464.0,5.54,4.5,3.6
+KP1092,Skincare Gift Set,Lumière,Beauty,mid,180.49,134593,22176309.0,5.35,4.4,8.7
+KP1105,Self-Help Guide,Mindful,Books,budget,80.38,303896,22043497.0,1.37,4.7,9.8
+KP1044,Stand Mixer,ChefPro,Home & Kitchen,premium,752.6,30526,22043271.0,5.21,4.9,4.1
+KP1017,Pool Float Set,AquaLife,Garden & Pool,budget,221.72,101913,20405489.0,5.5,4.3,9.7
+KP1119,Craft Sauce Trio,Bean Co.,Groceries,mid,122.07,174188,19758564.0,1.32,4.6,7.1
+KP1097,Hair Straightener,GlowUp,Beauty,premium,360.49,57099,19503296.0,3.41,4.7,5.2
+KP1071,Leather Jacket,Kalahari Co.,Fashion,premium,557.41,34895,18605120.0,11.97,4.3,4.4
+KP1086,Cat Litter 10kg,Whiskers,Pet Supplies,budget,104.61,179580,17868179.0,3.17,4.8,4.9
+KP1033,Tyre Inflator,TorqueX,Automotive,budget,220.8,80350,16145277.0,10.88,4.0,9.0
+KP1037,Roof Rack System,DriveLux,Automotive,premium,858.43,19737,16086350.0,7.91,4.3,5.1
+KP1109,Colouring Book Adult,Mindful,Books,budget,67.26,246665,15521649.0,1.66,4.7,6.4
+KP1011,Pool Cleaning Kit,AquaLife,Garden & Pool,mid,434.47,35486,14762597.0,5.18,4.5,4.3
+KP1021,"Mountain Bike 29""",Trailblaze,Sport & Outdoor,premium,1050.19,13535,13928037.0,4.33,4.6,2.0
+KP1107,Study Guide Matric,Little Reader,Books,budget,66.24,209019,12707511.0,1.72,4.7,8.2
+KP1114,Olive Oil 750ml,Karoo Pantry,Groceries,mid,108.39,120215,12413113.0,0.63,4.8,4.7
+KP1111,Rooibos Tea 80s,Karoo Pantry,Groceries,budget,69.25,190163,12197891.0,0.75,4.3,7.4
+KP1030,Cooler Box 50L,Kaya,Sport & Outdoor,mid,511.15,25785,12064466.0,5.45,4.6,8.5
+KP1038,Car Vacuum Cleaner,TorqueX,Automotive,budget,190.68,64908,12006704.0,9.03,4.2,3.0
+KP1089,Automatic Feeder,PawNutrition,Pet Supplies,premium,489.02,24122,11623296.0,2.23,4.9,1.5
+KP1063,Doll House Deluxe,PlayLand,Toys,premium,622.53,18289,10882448.0,5.08,4.7,4.4
+KP1042,Coffee Machine,ChefPro,Home & Kitchen,premium,904.51,12423,10634308.0,3.04,4.9,5.4
+KP1075,Cotton T-Shirt 3pk,Everyday,Fashion,budget,100.1,108004,10158688.0,21.45,3.6,6.0
+KP1059,Baby Bath Set,TinyTots,Baby,budget,147.51,67759,9719302.0,8.69,4.4,2.8
+KP1115,Snack Box Variety,Bean Co.,Groceries,budget,71.17,141090,9602503.0,0.92,4.6,4.4
+KP1001,"55"" 4K Smart TV",Vortex,Electronics,premium,1228.11,7515,9090801.0,8.79,4.5,1.5
+KP1102,Cookbook Braai Edition,Cape Press,Books,mid,159.2,57165,8571014.0,1.86,4.7,5.8
+KP1078,Sports Cap,Everyday,Fashion,budget,97.72,93523,8505720.0,17.93,3.8,6.9
+KP1074,Summer Dress Floral,Bloom,Fashion,mid,243.99,37129,8372008.0,21.35,3.6,7.6
+KP1068,Plush Teddy XL,PlayLand,Toys,budget,139.27,64843,8162895.0,5.7,4.8,9.6
+KP1101,SA Bestseller Novel,Cape Press,Books,budget,71.71,117107,7757479.0,2.07,4.4,7.6
+KP1058,Playmat Activity Gym,TinyTots,Baby,mid,305.33,26073,7672782.0,7.14,4.3,3.6
+KP1053,Nappy Mega Pack,TenderCare,Baby,budget,141.67,55936,7501773.0,8.55,4.0,5.3
+KP1095,Electric Shaver,GroomKing,Beauty,mid,199.19,37253,7245540.0,2.44,4.7,2.4
+KP1080,Formal Shirt,Everyday,Fashion,mid,258.07,29368,7149552.0,17.74,3.8,5.7
+KP1043,Non-Stick Pan Set,Hearth,Home & Kitchen,mid,362.16,20371,6789728.0,8.76,4.7,8.0
+KP1104,Business Strategy Book,Cape Press,Books,mid,135.86,53907,6748227.0,1.4,4.5,7.9
+KP1061,Building Blocks 500pc,PlayLand,Toys,mid,260.83,26679,6485958.0,4.27,4.6,6.8
+KP1041,Air Fryer 5.5L,ChefPro,Home & Kitchen,mid,436.6,15453,6286653.0,5.21,4.3,6.8
+KP1113,Coffee Beans 1kg,Bean Co.,Groceries,mid,119.98,53505,6150068.0,0.96,4.5,4.2
+KP1112,Biltong 1kg,Karoo Pantry,Groceries,premium,259.96,22709,5590874.0,0.73,4.6,5.3
+KP1045,Cutlery Set 24pc,Hearth,Home & Kitchen,budget,185.42,30083,5402382.0,7.17,4.4,3.2
+KP1018,Plant Pot Trio,GreenThumb,Garden & Pool,budget,232.83,25511,5360484.0,4.55,4.6,9.8
+KP1066,Action Figure Set,SpeedToy,Toys,mid,252.3,22939,5334129.0,4.08,4.4,7.8
+KP1008,USB-C Charger,Voltiq,Electronics,budget,301.99,18925,5232927.0,9.27,4.3,8.4
+KP1010,Soundbar 2.1,SonicWave,Electronics,premium,1312.34,4064,5100359.0,4.58,4.6,4.4
+KP1015,Solar Pool Heater,AquaLife,Garden & Pool,premium,986.92,5284,4978415.0,4.67,4.7,4.5
+KP1082,Cat Scratching Tower,Whiskers,Pet Supplies,mid,184.52,28858,4967907.0,2.16,4.5,6.7
+KP1099,Nail Care Set,GlowUp,Beauty,budget,89.81,57253,4899869.0,4.4,4.6,4.7
+KP1070,Art & Craft Kit,FunBox,Toys,budget,111.6,44833,4721498.0,3.0,4.4,5.6
+KP1052,Car Seat Group 1-3,LittleOnes,Baby,premium,605.87,7755,4498478.0,5.13,4.6,4.3
+KP1047,Kettle 1.7L,ChefPro,Home & Kitchen,budget,170.39,26818,4414439.0,5.17,4.5,3.4
+KP1062,Remote Control Car,SpeedToy,Toys,mid,231.42,18915,4259239.0,5.47,4.6,2.7
+KP1012,Patio Umbrella 3m,Veld,Garden & Pool,mid,509.41,8987,4199534.0,5.78,4.4,8.3
+KP1054,Baby Monitor Video,TenderCare,Baby,mid,273.8,15713,4103639.0,5.88,4.2,4.6
+KP1079,Sandals Leather,Bloom,Fashion,mid,239.76,17380,4026150.0,13.61,3.9,3.4
+KP1084,Aquarium Kit 60L,Whiskers,Pet Supplies,premium,452.27,9202,3971622.0,2.23,4.8,4.6
+KP1096,Face Serum Vitamin C,Lumière,Beauty,budget,88.49,46875,3870438.0,1.61,4.5,6.7
+KP1103,Kids Story Collection,Little Reader,Books,budget,81.91,47805,3535689.0,1.83,4.4,9.7
+KP1106,Coffee Table Photo Book,Cape Press,Books,premium,361.73,9791,3371792.0,1.42,4.6,4.8
+KP1083,Pet Bed Large,PawNutrition,Pet Supplies,budget,98.33,35234,3263935.0,3.83,4.4,5.8
+KP1073,Denim Jeans Slim,Kalahari Co.,Fashion,mid,249.23,13352,3246091.0,19.03,3.7,2.5
+KP1098,Beard Trimmer Kit,GroomKing,Beauty,budget,93.29,37359,3202853.0,4.21,4.3,8.1
+KP1093,Hair Dryer Ionic,GlowUp,Beauty,mid,174.75,18674,3095568.0,5.47,4.4,5.1
+KP1120,Nuts & Dried Fruit 2kg,Karoo Pantry,Groceries,mid,140.87,22517,2917802.0,0.78,4.6,8.0
+KP1013,Braai Stand Deluxe,Kaya,Garden & Pool,premium,1205.65,2341,2766793.0,3.64,4.7,2.0
+KP1085,Dog Leash & Collar,PawNutrition,Pet Supplies,budget,95.24,26845,2344527.0,3.8,4.3,8.3
+KP1065,Puzzle 1000pc,FunBox,Toys,budget,117.3,18879,2144099.0,6.26,4.2,3.2
+KP1118,Rusks 1kg,Karoo Pantry,Groceries,budget,59.4,31524,1825016.0,1.16,4.7,2.5
+KP1088,Chew Toy Bundle,Whiskers,Pet Supplies,budget,109.87,15947,1673038.0,2.36,4.7,4.5
+KP1117,Pasta Selection 6pk,Bean Co.,Groceries,budget,59.91,24813,1347988.0,1.48,4.6,9.3
+KP1064,Board Game Classic,FunBox,Toys,budget,141.02,8029,1085212.0,3.93,4.5,4.2

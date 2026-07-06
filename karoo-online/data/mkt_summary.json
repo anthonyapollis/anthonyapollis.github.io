@@ -1,0 +1,20 @@
+{
+  "paid_spend": 3799011,
+  "paid_revenue": 12659554,
+  "paid_roas": 3.33,
+  "best_paid_channel": "Google Shopping",
+  "best_paid_roas": 4.67,
+  "best_paid_channel_by_roas": "Google Shopping",
+  "remarketing_spend": 67000,
+  "remarketing_revenue": 573728,
+  "remarketing_roas": 8.6,
+  "best_remarketing": "Email Flows (automated)",
+  "best_remarketing_roas": 19.4,
+  "seo_revenue": 19249568,
+  "seo_sessions_latest": 92535,
+  "seo_page1_keywords": 1592,
+  "blended_roas": 3.42,
+  "ai_share_of_voice": 19,
+  "total_marketing_revenue": 32482850,
+  "total_marketing_spend": 3866011
+}
