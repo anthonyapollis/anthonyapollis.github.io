@@ -150,6 +150,23 @@ def body(map_html, ts_html, web=False):
 </div>
 
 <div class="page" style="{pb}">
+  <h2><span class="kicker">Why you can trust the numbers</span>How the Figures Reconcile</h2>
+  <p style="font-size:12.5px;margin:2px 0 8px">A report is only as good as its numbers. Here is how every
+  figure in this document is <b>reconciled</b> — guaranteed to agree from the moment of the sale to the KPI
+  on the page — and the technology that makes that possible.</p>
+  {img('reconciliation.png')}
+  <div class="take"><b>The principle — one source of truth:</b> the value captured at checkout is the <i>same</i>
+  value that lands in S3, gets transformed by Athena, and appears in this report. Nothing is re-keyed or
+  re-estimated along the way. <b>Validation gates</b> (null, duplicate, referential-integrity and
+  revenue cross-checks) run <i>before</i> any figure is trusted — our catalogue-to-orders join, for example,
+  resolved <b>100% of IDs</b>. <b>The tech guarantees it:</b> a single Glue catalogue means every tool reads
+  one schema; an immutable S3 raw zone means the source never shifts; deterministic Athena ETL means the same
+  input always yields the same output; and Terraform means the whole pipeline is reproducible on demand. That
+  is why, across catalogue, marketing, customers and finance, <b>the figures always agree</b>.</div>
+  <div class="footer"><span>KAROO ONLINE</span><span>RECONCILIATION · 04</span></div>
+</div>
+
+<div class="page" style="{pb}">
   <h2><span class="kicker">What we sell · real catalogue</span>1,000 Real Products</h2>
   <div class="kpi-grid">
     <div class="kpi"><div class="v">R{tk['price_median']:,}</div><div class="l">Median price · R{tk['price_min']}–R{tk['price_max']:,}</div></div>
