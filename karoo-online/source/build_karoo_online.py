@@ -142,7 +142,7 @@ def body(map_html, ts_html, web=False):
   <p style="font-size:12.5px;margin:2px 0 8px">Before any analysis, the behaviour has to be <i>captured</i>.
   Google Tag Manager sits on the storefront and fires a tracked <code>dataLayer</code> event at every step of
   the journey — which flows to GA4 and into the lakehouse. This is the front door of the whole pipeline.</p>
-  {img('gtm_demo.png')}
+  <div class="two-col"><div>{img('gtm_shot1.png')}</div><div>{img('gtm_shot2.png')}</div></div>
   <div class="take"><b>Why it matters:</b> clean, structured event capture at the source is what makes the funnel,
   attribution and recommendation analysis later in this report possible. <b>No tags, no data — no insight.</b>
   Each purchase event carries its value and transaction ID, so revenue ties out from click to checkout.</div>
