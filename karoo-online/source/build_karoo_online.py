@@ -239,6 +239,22 @@ def body(map_html, ts_html, web=False):
 </div>
 
 <div class="page" style="{pb}">
+  <h2><span class="kicker">From data to decisions</span>The Machine-Learning Journey</h2>
+  <p style="font-size:12.5px;margin:2px 0 8px">Machine learning here is never a black box or a buzzword — it's a
+  disciplined path from a real business question to an action a team can take. Every model in this report walks
+  the same five steps, and is graded honestly against a naive baseline.</p>
+  {img('ml_journey.png')}
+  {img('ml_scorecard.png')}
+  <div class="take"><b>How to read the scorecard:</b> a model only earns its place if it beats the baseline
+  <i>and</i> drives a decision worth more than the effort. Two honest lessons stand out — the
+  <b>delivery predictor barely beats a linear baseline</b> (delivery time is an additive process, so no model
+  can do much better; knowing when <i>not</i> to over-engineer is a skill), while <b>no single fraud signal is
+  enough</b>, but stacking them lifts a 65%-precision model into a <b>91%-precision review queue</b>. The next
+  three pages are the deep-dives — recommendations, correlations, and fraud — each following this same journey.</div>
+  <div class="footer"><span>KAROO ONLINE</span><span>THE ML JOURNEY · 07</span></div>
+</div>
+
+<div class="page" style="{pb}">
   <h2><span class="kicker">What customers buy together</span>Recommendations</h2>
   {img('rb_recommendations.png')}
   <table><tr><th>Bought together</th><th>Lift</th><th>Confidence</th></tr>{rec_rows}</table>

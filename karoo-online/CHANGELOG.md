@@ -3,6 +3,13 @@
 All notable changes to the Karoo Online data-story project. Newest first.
 Versioned with git tags (`v1.0`, `v1.1`, …) so any state can be recovered.
 
+## [v1.4] — 2026-07-07
+### Added
+- **Guided Machine-Learning Journey** — a walkthrough that takes the reader from a business
+  question to a decision through five steps (Ask → Prepare → Train → Validate → Decide), plus a
+  **model scorecard** grading all four models (delivery, recommendations, churn, fraud) with
+  honest metrics against a naive baseline.
+
 ## [v1.3] — 2026-07-06
 ### Added
 - **Data-reconciliation section** — traces one figure (R899) end-to-end (Capture → Collect →
