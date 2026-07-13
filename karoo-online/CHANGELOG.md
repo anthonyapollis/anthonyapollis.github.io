@@ -3,6 +3,12 @@
 All notable changes to the Karoo Online data-story project. Newest first.
 Versioned with git tags (`v1.0`, `v1.1`, …) so any state can be recovered.
 
+## [v1.4.1] — 2026-07-07
+### Fixed
+- **Time-horizon consistency** — reconciled the framing so the 4-year revenue history
+  (Jul 2022 – Jun 2026) and the recent deep-dive analysis window are described coherently,
+  removing a stale "18 months" reference in the data-provenance section.
+
 ## [v1.4] — 2026-07-07
 ### Added
 - **Guided Machine-Learning Journey** — a walkthrough that takes the reader from a business
