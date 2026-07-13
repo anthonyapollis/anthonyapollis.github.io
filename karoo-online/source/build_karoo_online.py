@@ -132,8 +132,9 @@ def body(map_html, ts_html, web=False):
   {img('data_provenance.png')}
   <div class="take">Five sources — a marketplace catalogue, web &amp; app analytics, orders and marketing —
   land in <b>one governed lakehouse</b> (<code>karoo_db</code> on AWS). Every insight reads from that
-  single source, so <b>the figures always agree</b>. <b>Analysis window: January 2025 – June 2026
-  (18 months)</b>, the trailing period to the latest complete month.</div>
+  single source, so <b>the figures always agree</b>. <b>Time horizons:</b> the revenue history spans
+  <b>four years (Jul 2022 – Jun 2026)</b> for trend and seasonality, while the deep-dive analyses
+  (catalogue, behaviour, churn, fraud) focus on the most recent <b>trailing period</b> for freshness.</div>
   <div class="footer"><span>KAROO ONLINE</span><span>DATA PROVENANCE · 02</span></div>
 </div>
 
