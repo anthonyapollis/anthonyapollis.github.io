@@ -41,6 +41,16 @@ a{color:inherit}
     radial-gradient(circle at 91% 18%,rgba(255,255,255,.18) 0 64px,transparent 66px),
     radial-gradient(circle at 18% 78%,rgba(255,255,255,.14) 0 42px,transparent 44px),
     linear-gradient(135deg,#536fd1 0%,#7d4bb4 46%,#c35fb4 100%);
+  background-size:auto,auto,auto,320% 320%;
+  animation:heroColorShift 12s ease-in-out infinite;
+}
+.hero > *{position:relative;z-index:1}
+@keyframes heroColorShift{
+  0%{background-position:0 0,0 0,0 0,0% 50%}
+  25%{background-position:18px -12px,-18px 14px,10px 12px,45% 50%}
+  50%{background-position:30px -20px,-28px 22px,20px 18px,100% 50%}
+  75%{background-position:12px -8px,-10px 8px,8px 10px,60% 50%}
+  100%{background-position:0 0,0 0,0 0,0% 50%}
 }
 .eyebrow{
   display:inline-flex;
@@ -86,6 +96,16 @@ h1{
   font-size:13px;
   font-weight:700;
   white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  animation:pillFloat 4.6s ease-in-out infinite;
+}
+.skill-pill:nth-child(2n){animation-delay:.35s}
+.skill-pill:nth-child(3n){animation-delay:.7s}
+@keyframes pillFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
 }
 .stats{
   display:grid;
@@ -168,7 +188,7 @@ h1{
   min-height:430px;
 }
 .card-top{
-  min-height:116px;
+  min-height:132px;
   padding:20px;
   color:#fff;
   display:flex;
@@ -187,6 +207,11 @@ h1{
   height:128px;
   border-radius:50%;
   background:rgba(255,255,255,.18);
+  animation:orbPulse 4.8s ease-in-out infinite;
+}
+@keyframes orbPulse{
+  0%,100%{transform:scale(1);opacity:.65}
+  50%{transform:scale(1.12);opacity:.95}
 }
 .category{
   align-self:flex-start;
@@ -199,12 +224,40 @@ h1{
   letter-spacing:1.2px;
   text-transform:uppercase;
 }
+.card-title-row{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:flex-end;
+  gap:13px;
+}
+.project-icon{
+  width:48px;
+  height:48px;
+  flex:0 0 48px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:31px;
+  line-height:1;
+  filter:drop-shadow(0 5px 0 rgba(0,0,0,.28));
+  transform-origin:center bottom;
+  animation:iconAlive 3.2s ease-in-out infinite;
+}
+.card:nth-child(3n+1) .project-icon{animation-delay:.18s}
+.card:nth-child(3n+2) .project-icon{animation-delay:.42s}
+.card:nth-child(3n+3) .project-icon{animation-delay:.66s}
+@keyframes iconAlive{
+  0%,100%{transform:translateY(0) rotate(0deg) scale(1)}
+  35%{transform:translateY(-5px) rotate(-3deg) scale(1.05)}
+  70%{transform:translateY(1px) rotate(3deg) scale(.98)}
+}
 .card-top h2{
   position:relative;
   z-index:1;
   font-size:22px;
   line-height:1.15;
-  max-width:92%;
+  max-width:100%;
   font-weight:900;
   letter-spacing:0;
 }
@@ -296,6 +349,11 @@ h1{
   .stat:nth-child(3){border-right:1px solid var(--line)}
   .stat:nth-child(even){border-right:0}
   .actions{grid-template-columns:1fr}
+  .project-icon{width:40px;height:40px;flex-basis:40px;font-size:27px}
+  .card-top h2{font-size:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero,.skill-pill,.card-top::after,.project-icon{animation:none}
 }
 </style>
 </head>
@@ -303,25 +361,25 @@ h1{
 <header class="hero">
   <div class="eyebrow">Data and Analytics Project Showcase</div>
   <h1>Anthony Apollis</h1>
-  <p class="subtitle">Delivered data engineering, analytics engineering, BI, ML, cloud, and digital analytics case studies with source repositories and live deployments where available.</p>
+  <p class="subtitle">Delivered data engineering, analytics engineering, BI, ML, cloud, and digital analytics projects with source repositories and live deployments where available.</p>
   <div class="skill-row">
-    <span class="skill-pill">Snowflake</span>
-    <span class="skill-pill">dbt</span>
-    <span class="skill-pill">Microsoft Fabric</span>
-    <span class="skill-pill">Azure Databricks</span>
-    <span class="skill-pill">BigQuery</span>
-    <span class="skill-pill">Python ML</span>
-    <span class="skill-pill">Power BI</span>
-    <span class="skill-pill">GA4 + GTM</span>
+    <span class="skill-pill">🏔️ Snowflake</span>
+    <span class="skill-pill">⚙️ dbt</span>
+    <span class="skill-pill">☁️ Microsoft Fabric</span>
+    <span class="skill-pill">🧱 Azure Databricks</span>
+    <span class="skill-pill">🔷 BigQuery</span>
+    <span class="skill-pill">🐍 Python ML</span>
+    <span class="skill-pill">📊 Power BI</span>
+    <span class="skill-pill">📈 GA4 + GTM</span>
   </div>
 </header>
 
 <section class="stats" aria-label="Project portfolio stats">
-  <div class="stat"><strong>22</strong><span>Projects</span></div>
+  <div class="stat"><strong>23</strong><span>Projects</span></div>
   <div class="stat"><strong>60+</strong><span>ML Models</span></div>
   <div class="stat"><strong>60M+</strong><span>Modeled Rows</span></div>
   <div class="stat"><strong>8</strong><span>Cloud/Data Platforms</span></div>
-  <div class="stat"><strong>14</strong><span>Verified Live Sites</span></div>
+  <div class="stat"><strong>15</strong><span>Verified Live Sites</span></div>
 </section>
 
 <main class="section">
@@ -640,10 +698,36 @@ function renderFilters(){
   });
 }
 
+function iconFor(project){
+  const text = `${project.title} ${project.category} ${project.filter}`.toLowerCase();
+  if(text.includes("pargo")) return "📦";
+  if(text.includes("bank")) return "🏦";
+  if(text.includes("ga4") || text.includes("marketing")) return "📡";
+  if(text.includes("karoo")) return "🛒";
+  if(text.includes("lyra") || text.includes("wellbeing")) return "💙";
+  if(text.includes("fasta") || text.includes("lending")) return "💳";
+  if(text.includes("debt")) return "🧾";
+  if(text.includes("afrimoney") || text.includes("remittance")) return "🌍";
+  if(text.includes("globeleq") || text.includes("energy")) return "⚡";
+  if(text.includes("libstar") || text.includes("product")) return "🏷️";
+  if(text.includes("petroleum") || text.includes("mining")) return "⛽";
+  if(text.includes("cityhire") || text.includes("fleet")) return "🚚";
+  if(text.includes("accommodation") || text.includes("travel")) return "🏨";
+  if(text.includes("plantip") || text.includes("systems")) return "🌱";
+  if(text.includes("penbev") || text.includes("fmcg")) return "🥤";
+  if(text.includes("fixza") || text.includes("whatsapp")) return "🛠️";
+  if(text.includes("tshiamiso") || text.includes("claims")) return "📋";
+  if(text.includes("fabric")) return "🧵";
+  if(text.includes("property")) return "🏘️";
+  if(text.includes("retail")) return "🛍️";
+  return "📊";
+}
+
 function renderProjects(){
   const visible = activeFilter === "All" ? projects : projects.filter(p => p.filter === activeFilter);
   count.textContent = `${visible.length} project${visible.length === 1 ? "" : "s"} shown`;
   grid.innerHTML = visible.map(p => {
+    const icon = p.icon || iconFor(p);
     const liveButton = p.live
       ? `<a class="link-btn" href="${p.live}" target="_blank" rel="noopener">${p.liveLabel}</a>`
       : `<span class="link-btn disabled">${p.liveLabel}</span>`;
@@ -651,7 +735,10 @@ function renderProjects(){
       <article class="card">
         <div class="card-top" style="--a:${p.colors[0]};--b:${p.colors[1]}">
           <span class="category">${p.category}</span>
-          <h2>${p.title}</h2>
+          <div class="card-title-row">
+            <span class="project-icon" aria-hidden="true">${icon}</span>
+            <h2>${p.title}</h2>
+          </div>
         </div>
         <div class="card-body">
           <p class="summary">${p.summary}</p>
