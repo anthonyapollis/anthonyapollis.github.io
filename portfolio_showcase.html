@@ -178,6 +178,46 @@ h1{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-3px)}
 }
+.tool-strip{
+  max-width:1120px;
+  margin:18px auto 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.tool-strip-label{
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.82);
+  background:rgba(0,0,0,.16);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  padding:6px 10px;
+}
+.code-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:6px;
+  border:1px solid rgba(255,255,255,.32);
+  background:rgba(21,29,50,.48);
+  color:#fff;
+  font-size:11px;
+  font-weight:900;
+  line-height:1;
+  box-shadow:0 5px 0 rgba(0,0,0,.14);
+}
+.code-chip code{
+  color:#fff;
+  font-family:Consolas,'Courier New',monospace;
+  font-size:11px;
+  font-weight:900;
+}
 .stats{
   display:grid;
   grid-template-columns:repeat(5,1fr);
@@ -451,6 +491,7 @@ h1{
   .section{padding:36px 16px 50px}
   .section-head{display:block}
   .section-copy{margin-top:12px}
+  .tool-strip{justify-content:flex-start}
   .grid{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr 1fr}
   .stat{min-height:96px}
@@ -486,6 +527,21 @@ h1{
     <span class="skill-pill">🚀 Netlify</span>
     <span class="skill-pill">🔗 GitHub Pages</span>
     <span class="skill-pill">📦 FastAPI</span>
+  </div>
+  <div class="tool-strip" aria-label="Code and implementation tools">
+    <span class="tool-strip-label">Code + build tools</span>
+    <span class="code-chip"><code>.py</code> Python</span>
+    <span class="code-chip"><code>.sql</code> SQL</span>
+    <span class="code-chip"><code>.ipynb</code> Notebooks</span>
+    <span class="code-chip"><code>dbt</code> Models</span>
+    <span class="code-chip"><code>spark</code> PySpark</span>
+    <span class="code-chip"><code>mlflow</code> Experiments</span>
+    <span class="code-chip"><code>DAX</code> Power BI</span>
+    <span class="code-chip"><code>Airflow</code> DAGs</span>
+    <span class="code-chip"><code>ADF</code> Pipelines</span>
+    <span class="code-chip"><code>FastAPI</code> APIs</span>
+    <span class="code-chip"><code>JS</code> Chart.js</span>
+    <span class="code-chip"><code>Git</code> Repos</span>
   </div>
 </header>
 
