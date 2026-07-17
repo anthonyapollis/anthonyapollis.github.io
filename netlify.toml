@@ -18,7 +18,7 @@
   to = "/portfolio_showcase.html"
   status = 200
 
-# Clean project routes. Use verified live deployments where available.
+# Clean project routes. Use verified Netlify/live deployments where available.
 [[redirects]]
   from = "/afrimoney"
   to = "https://afrimoney.netlify.app/"
@@ -51,19 +51,19 @@
 
 [[redirects]]
   from = "/cityhire"
-  to = "https://anthonyapollis.github.io/CityHire_Fleet_Stock_Intelligence/"
+  to = "https://cityhire.netlify.app/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/plantip"
-  to = "https://anthonyapollis.github.io/PlantIP-Systems-Analysis-Platform/"
+  to = "https://plantip-systems-analysis-platform.netlify.app/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/tshiamiso"
-  to = "https://anthonyapollis.github.io/tshiamiso-claimant-intelligence/"
+  to = "https://tshiamiso-claimant-intelligence.netlify.app/"
   status = 301
   force = true
 
@@ -76,7 +76,13 @@
 
 [[redirects]]
   from = "/prime-capital-bank"
-  to = "https://github.com/anthonyapollis/prime-capital-bank"
+  to = "https://primecapitalbank.netlify.app/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/primecapitalbank"
+  to = "https://primecapitalbank.netlify.app/"
   status = 301
   force = true
 
@@ -94,31 +100,49 @@
 
 [[redirects]]
   from = "/fasta"
-  to = "https://github.com/anthonyapollis/FASTA_FinTech_LendingDW"
+  to = "https://fastamo.netlify.app/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fastamo"
+  to = "https://fastamo.netlify.app/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/debtbusters"
-  to = "https://github.com/anthonyapollis/DebtBusters_Intelligence_Platform"
+  to = "https://debtbusters.netlify.app/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/libstar"
-  to = "https://github.com/anthonyapollis/Libstar-Product-Analytics"
+  to = "https://libstar.netlify.app/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/kalahari"
-  to = "https://github.com/anthonyapollis/KalahariPetroleum_DW_Azure_Qlik"
+  to = "https://kalaharipetroleum.netlify.app/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/kalaharipetroleum"
+  to = "https://kalaharipetroleum.netlify.app/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/accommodation"
-  to = "https://github.com/anthonyapollis/SA_Accommodation_Intelligence_Platform"
+  to = "https://lekkeslaap.netlify.app/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/lekkeslaap"
+  to = "https://lekkeslaap.netlify.app/"
   status = 301
   force = true
 
@@ -154,12 +178,24 @@
 
 [[redirects]]
   from = "/property"
-  to = "https://github.com/anthonyapollis/SA_Property_Intelligence"
+  to = "https://sapropertyintelligence.netlify.app/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sapropertyintelligence"
+  to = "https://sapropertyintelligence.netlify.app/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/wellness"
-  to = "https://github.com/anthonyapollis/SA_Wellness_Retail_Intelligence"
+  to = "https://sa-wellness.netlify.app/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sa-wellness"
+  to = "https://sa-wellness.netlify.app/"
   status = 301
   force = true
