@@ -54,6 +54,7 @@ a{color:inherit}
   color:#fff;
   position:relative;
   overflow:hidden;
+  isolation:isolate;
   background:
     radial-gradient(circle at 8% 15%,rgba(255,255,255,.22) 0 88px,transparent 90px),
     radial-gradient(circle at 91% 18%,rgba(255,255,255,.18) 0 64px,transparent 66px),
@@ -64,10 +65,23 @@ a{color:inherit}
   transition:--hero-a 900ms ease,--hero-b 900ms ease,--hero-c 900ms ease;
 }
 .hero > *{position:relative;z-index:1}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(circle at 22% 74%,rgba(255,255,255,.2) 0 46px,transparent 48px),
+    radial-gradient(circle at 86% 24%,rgba(255,255,255,.16) 0 76px,transparent 78px),
+    linear-gradient(120deg,#cf74f2 0%,#f261b8 45%,#f25f7f 100%);
+  opacity:.18;
+  animation:heroLiveOverlay 6s ease-in-out infinite;
+}
 .hero::after{
   content:"";
   position:absolute;
   inset:-30%;
+  z-index:0;
   background:conic-gradient(from 120deg,transparent,rgba(255,255,255,.18),transparent 28%,rgba(255,255,255,.1),transparent 55%);
   mix-blend-mode:soft-light;
   animation:heroSweep 16s linear infinite;
@@ -81,6 +95,33 @@ a{color:inherit}
 }
 @keyframes heroSweep{
   to{transform:rotate(360deg)}
+}
+@keyframes heroLiveOverlay{
+  0%{
+    opacity:.05;
+    filter:hue-rotate(0deg) saturate(1);
+    transform:translate3d(-2%,0,0) scale(1);
+  }
+  25%{
+    opacity:.58;
+    filter:hue-rotate(34deg) saturate(1.22);
+    transform:translate3d(1.5%,-1.5%,0) scale(1.035);
+  }
+  50%{
+    opacity:.76;
+    filter:hue-rotate(82deg) saturate(1.35);
+    transform:translate3d(2%,1%,0) scale(1.055);
+  }
+  75%{
+    opacity:.48;
+    filter:hue-rotate(145deg) saturate(1.25);
+    transform:translate3d(-1%,2%,0) scale(1.025);
+  }
+  100%{
+    opacity:.05;
+    filter:hue-rotate(220deg) saturate(1);
+    transform:translate3d(-2%,0,0) scale(1);
+  }
 }
 .eyebrow{
   display:inline-flex;
@@ -416,10 +457,6 @@ h1{
   .project-icon{width:44px;height:44px;flex-basis:44px;font-size:29px}
   .card-body h2{font-size:20px}
 }
-@media (prefers-reduced-motion:reduce){
-  .hero,.hero::after,.skill-pill,.card-top::after,.project-icon,.card.is-live .card-top::before,.card:hover .card-top::before{animation:none}
-  .card{opacity:1;transform:none}
-}
 </style>
 </head>
 <body>
@@ -753,7 +790,7 @@ const count = document.getElementById("projectCount");
 let activeFilter = "All";
 let liveTimer;
 let revealObserver;
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduceMotion = false;
 const heroPalettes = [
   ["#536fd1","#7d4bb4","#c35fb4"],
   ["#d86bdb","#e96ab7","#f15d8c"],
@@ -836,7 +873,6 @@ startHeroPalette();
 animateStats();
 
 function startHeroPalette(){
-  if(reduceMotion) return;
   const hero = document.querySelector(".hero");
   let index = 0;
   const applyPalette = () => {
@@ -851,7 +887,6 @@ function startHeroPalette(){
 }
 
 function animateStats(){
-  if(reduceMotion) return;
   document.querySelectorAll(".stat strong[data-count-to]").forEach(el => {
     const target = Number(el.dataset.countTo);
     const suffix = el.dataset.suffix || "";
@@ -873,11 +908,6 @@ function activateDynamicCards(){
   if(revealObserver) revealObserver.disconnect();
   const cards = [...document.querySelectorAll(".card")];
   if(!cards.length) return;
-
-  if(reduceMotion){
-    cards.forEach(card => card.classList.add("is-visible"));
-    return;
-  }
 
   revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
