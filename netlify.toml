@@ -1,0 +1,165 @@
+[build]
+  publish = "."
+
+# Netlify front page: serve the full project showcase at the site root.
+[[redirects]]
+  from = "/"
+  to = "/portfolio_showcase.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/portfolio"
+  to = "/portfolio_showcase.html"
+  status = 200
+
+[[redirects]]
+  from = "/showcase"
+  to = "/portfolio_showcase.html"
+  status = 200
+
+# Clean project routes. Use verified live deployments where available.
+[[redirects]]
+  from = "/afrimoney"
+  to = "https://afrimoney.netlify.app/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/afrimoney/*"
+  to = "https://afrimoney.netlify.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/globeleq"
+  to = "https://globeleq.netlify.app/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/globeleq/*"
+  to = "https://globeleq.netlify.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ga4"
+  to = "https://anthonyapollis.github.io/ga4-analytics-showcase/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cityhire"
+  to = "https://anthonyapollis.github.io/CityHire_Fleet_Stock_Intelligence/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/plantip"
+  to = "https://anthonyapollis.github.io/PlantIP-Systems-Analysis-Platform/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tshiamiso"
+  to = "https://anthonyapollis.github.io/tshiamiso-claimant-intelligence/"
+  status = 301
+  force = true
+
+# Source/repo routes for projects without verified public live deployments yet.
+[[redirects]]
+  from = "/pargo-parcels"
+  to = "https://github.com/anthonyapollis/PargoParcels-Portfolio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prime-capital-bank"
+  to = "https://github.com/anthonyapollis/prime-capital-bank"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ga4-hub"
+  to = "https://github.com/anthonyapollis/ga4-intelligence-hub"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/lyra"
+  to = "https://github.com/anthonyapollis/Lyra-Analytics-Project"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fasta"
+  to = "https://github.com/anthonyapollis/FASTA_FinTech_LendingDW"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/debtbusters"
+  to = "https://github.com/anthonyapollis/DebtBusters_Intelligence_Platform"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/libstar"
+  to = "https://github.com/anthonyapollis/Libstar-Product-Analytics"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/kalahari"
+  to = "https://github.com/anthonyapollis/KalahariPetroleum_DW_Azure_Qlik"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/accommodation"
+  to = "https://github.com/anthonyapollis/SA_Accommodation_Intelligence_Platform"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/penbev"
+  to = "https://github.com/anthonyapollis/PenBev-Analytics"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pargo-databricks"
+  to = "https://github.com/anthonyapollis/Pargo-Databricks-Medallion"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fixza"
+  to = "https://github.com/anthonyapollis/fixza-whatsapp-platform"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gcp-marketing"
+  to = "https://github.com/anthonyapollis/GCP-Marketing-Analytics-Platform"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/leatt"
+  to = "https://github.com/anthonyapollis/leatt-fabric-bi-ml-proof"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/property"
+  to = "https://github.com/anthonyapollis/SA_Property_Intelligence"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wellness"
+  to = "https://github.com/anthonyapollis/SA_Wellness_Retail_Intelligence"
+  status = 301
+  force = true
