@@ -581,12 +581,12 @@ h1{
 <script>
 const projects = [
   {
-    title:"Pargo Parcels Data Warehouse",
-    category:"Logistics + ML",
+    title:"Pargo Parcel Intelligence Platform",
+    category:"Snowflake + ML",
     filter:"Logistics",
     summary:"Snowflake and dbt parcel intelligence platform with 30.2M parcels, tracking-event marts, SLA analytics, return-risk models, and executive dashboards.",
     metrics:["30.2M parcels","15 ML models","Snowflake + dbt"],
-    stack:["Python","SQL","Snowflake","dbt","scikit-learn","XGBoost","ARIMA","HTML","Chart.js","GitHub Pages"],
+    stack:["Python","SQL","Snowflake","dbt","Snowpark-style automation","scikit-learn","XGBoost","LightGBM","ARIMA","HTML","Chart.js","Netlify"],
     git:"https://github.com/anthonyapollis/PargoParcels-Portfolio",
     live:"https://pargoparcels.netlify.app/",
     liveLabel:"Netlify",
@@ -761,15 +761,15 @@ const projects = [
     colors:["#7f1d1d","#ef4444"]
   },
   {
-    title:"Pargo Databricks Medallion",
-    category:"Databricks Platform",
+    title:"Pargo Databricks Medallion Engine",
+    category:"Azure Databricks",
     filter:"Logistics",
-    summary:"Databricks medallion analytics platform with Bronze/Silver/Gold/ML notebooks, PySpark, Delta Lake, XGBoost, MLflow and workflow orchestration.",
-    metrics:["Medallion pipeline","MLflow","PySpark"],
-    stack:["Databricks","PySpark","Delta Lake","XGBoost","MLflow","Serverless Workflows","Bronze/Silver/Gold","Notebooks"],
+    summary:"Azure Databricks engine-only build for the Pargo pipeline with ADLS Gen2 landing storage, ADF orchestration pattern, Bronze/Silver/Gold/ML notebooks, PySpark, Delta Lake, XGBoost, MLflow and Workflow deployment.",
+    metrics:["Azure engine","MLflow","PySpark"],
+    stack:["Azure Databricks","ADLS Gen2","Azure Data Factory","PySpark","Delta Lake","XGBoost","MLflow","Databricks Workflows","Bronze/Silver/Gold","Notebooks"],
     git:"https://github.com/anthonyapollis/Pargo-Databricks-Medallion",
-    live:"",
-    liveLabel:"Live site pending",
+    live:"https://pargo-databricks-medallion.netlify.app/",
+    liveLabel:"Netlify",
     colors:["#dc2626","#f97316"]
   },
   {
