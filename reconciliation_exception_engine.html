@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bank ↔ System Reconciliation · AI Exception Engine</title>
+<style>
+  :root{
+    --bg:#eef2f8; --panel:#ffffff; --panel2:#f4f7fc; --line:#dde5f0;
+    --acc:#3b6fe0; --acc-d:#2554c4; --green:#16a34a; --amber:#d98a00; --red:#e0483f;
+    --violet:#7c5cf0; --text:#1e2733; --muted:#6b7789;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',Tahoma,sans-serif;background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(91,157,255,0.10), transparent 60%),
+      var(--bg); color:var(--text); padding:22px; min-height:100vh;}
+  .wrap{max-width:1240px;margin:0 auto;}
+
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;
+    border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:18px;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .logo{width:44px;height:44px;border-radius:11px;background:linear-gradient(135deg,var(--acc),var(--acc-d));
+    display:flex;align-items:center;justify-content:center;font-weight:900;color:#ffffff;font-size:20px;
+    box-shadow:0 0 22px rgba(91,157,255,0.45);}
+  .brand h1{font-size:19px;font-weight:800;letter-spacing:.2px;}
+  .brand p{font-size:12.5px;color:var(--muted);margin-top:2px;}
+  .byline{text-align:right;font-size:12px;color:var(--muted);line-height:1.5;}
+  .byline b{color:var(--text);}
+
+  .gov{display:flex;align-items:flex-start;gap:12px;background:linear-gradient(90deg,rgba(91,157,255,.10),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:13px;color:var(--text);line-height:1.5;}
+  .gov .k{font-size:18px;}
+
+  .medallion{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 13px;position:relative;}
+  .stage .tag{font-size:10.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;}
+  .stage .ttl{font-size:13.5px;font-weight:700;margin:6px 0 4px;}
+  .stage .sub{font-size:11.5px;color:var(--muted);line-height:1.45;}
+  .stage.b .tag{color:#c08a5a;} .stage.s .tag{color:#c3ccd8;} .stage.g .tag{color:var(--green);} .stage.ai .tag{color:var(--acc);}
+  .stage:not(:last-child)::after{content:'→';position:absolute;right:-9px;top:50%;transform:translateY(-50%);color:var(--line);font-weight:900;z-index:2;}
+
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:12px;}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;transition:.25s;}
+  .kpi .n{font-size:26px;font-weight:900;letter-spacing:-.5px;transition:.25s;}
+  .kpi .l{font-size:11px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px;}
+  .kpi.green .n{color:var(--green);} .kpi.amber .n{color:var(--amber);} .kpi.red .n{color:var(--red);}
+
+  /* summary bar */
+  .sumbar{display:flex;height:10px;border-radius:6px;overflow:hidden;margin-bottom:18px;border:1px solid var(--line);}
+  .sumbar div{transition:width .5s cubic-bezier(.34,1.4,.64,1);}
+  .sb-m{background:var(--green);} .sb-p{background:var(--amber);} .sb-e{background:var(--red);}
+
+  .controls{display:flex;flex-wrap:wrap;align-items:center;gap:18px;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:14px 16px;margin-bottom:12px;}
+  .btn{background:var(--acc);color:#ffffff;border:none;font-weight:800;font-size:14px;padding:11px 22px;border-radius:8px;cursor:pointer;
+    box-shadow:0 6px 18px rgba(91,157,255,.35);transition:.2s;}
+  .btn:hover{filter:brightness(1.08);transform:translateY(-1px);}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text);box-shadow:none;font-weight:700;font-size:12.5px;padding:9px 14px;}
+  .btn.ghost:hover{border-color:var(--acc);color:var(--acc);}
+  .ctl{display:flex;flex-direction:column;gap:5px;font-size:11.5px;color:var(--muted);min-width:150px;}
+  .ctl .top{display:flex;justify-content:space-between;}
+  .ctl .top b{color:var(--acc);font-family:'Consolas',monospace;}
+  .ctl input[type=range]{width:100%;accent-color:var(--acc);cursor:pointer;}
+  .switch{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted);cursor:pointer;}
+
+  .databar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:12px;padding:11px 16px;margin-bottom:16px;font-size:12px;color:var(--muted);}
+  .databar .lab{font-weight:700;color:var(--text);}
+  .search{margin-left:auto;display:flex;align-items:center;gap:7px;}
+  .search input{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:20px;padding:7px 13px;font-size:12.5px;width:190px;}
+  .hint{font-size:11px;color:var(--muted);}
+  input[type=file]{display:none;}
+
+  .grid{display:grid;grid-template-columns:1fr 380px;gap:16px;}
+  @media(max-width:980px){.grid{grid-template-columns:1fr;} .kpis{grid-template-columns:repeat(2,1fr);} .medallion{grid-template-columns:1fr 1fr;}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  .card h2{font-size:13px;font-weight:800;letter-spacing:.3px;padding:13px 16px;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .filters{display:flex;gap:6px;}
+  .fbtn{font-size:11.5px;padding:5px 11px;border-radius:20px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;}
+  .fbtn.active{background:var(--acc);color:#ffffff;border-color:var(--acc);font-weight:700;}
+
+  table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  th{text-align:left;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+    padding:9px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel);}
+  td{padding:9px 14px;border-bottom:1px solid rgba(35,48,67,.55);}
+  tbody tr{cursor:pointer;transition:.12s;}
+  tbody tr:hover{background:rgba(91,157,255,.06);}
+  tbody tr.sel{background:rgba(91,157,255,.12);box-shadow:inset 3px 0 0 var(--acc);}
+  tbody tr.closed{opacity:.5;}
+  .mono{font-family:'Consolas','SF Mono',monospace;font-size:12px;color:#33415a;}
+  .amt{text-align:right;font-family:'Consolas',monospace;}
+  .edit{border-radius:4px;padding:2px 5px;outline:none;transition:.15s;}
+  .edit:hover{background:rgba(91,157,255,.10);box-shadow:inset 0 0 0 1px var(--line);}
+  .edit:focus{background:var(--panel2);box-shadow:inset 0 0 0 1px var(--acc);color:var(--text);}
+  .tblwrap{max-height:430px;overflow:auto;}
+  .rtag{font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:10px;margin-left:6px;vertical-align:middle;}
+  .rt-res{background:rgba(33,208,122,.18);color:var(--green);}
+  .rt-assign{background:rgba(91,157,255,.18);color:var(--acc);}
+  .rt-wo{background:rgba(138,153,173,.2);color:var(--muted);}
+
+  .pill{font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:.3px;white-space:nowrap;}
+  .p-match{background:rgba(33,208,122,.15);color:var(--green);}
+  .p-partial{background:rgba(245,166,35,.15);color:var(--amber);}
+  .p-exc{background:rgba(255,92,92,.15);color:var(--red);}
+  .p-fuzzy{background:rgba(167,139,250,.16);color:var(--violet);}
+
+  .ai .head{display:flex;align-items:center;gap:9px;padding:13px 16px;border-bottom:1px solid var(--line);}
+  .ai .dot{width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc);animation:blink 1.6s infinite;}
+  @keyframes blink{50%{opacity:.35;}}
+  .ai .body{padding:16px;min-height:340px;}
+  .ai .empty{color:var(--muted);font-size:13px;line-height:1.6;}
+  .ai .verdict{font-size:14px;font-weight:800;margin-bottom:10px;}
+  .ai p{font-size:13px;line-height:1.65;color:var(--text);margin-bottom:12px;}
+  .prov{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:11px 13px;font-size:12px;margin-bottom:12px;}
+  .prov .h{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:7px;}
+  .prov .row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;}
+  .prov .row span:first-child{color:var(--muted);}
+  .prov .row .mono{color:#33415a;}
+  .action{font-size:12.5px;color:var(--text);background:rgba(91,157,255,.08);border:1px solid var(--line);
+    border-left:3px solid var(--acc);border-radius:8px;padding:10px 12px;line-height:1.55;}
+  .wf{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+  .wf button{flex:1;min-width:96px;font-size:11.5px;font-weight:700;padding:9px 8px;border-radius:7px;cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);transition:.15s;}
+  .wf button:hover{transform:translateY(-1px);}
+  .wf .w-res:hover{border-color:var(--green);color:var(--green);}
+  .wf .w-assign:hover{border-color:var(--acc);color:var(--acc);}
+  .wf .w-wo:hover{border-color:var(--muted);color:var(--muted);}
+  .guard{margin-top:13px;font-size:11px;color:var(--muted);line-height:1.5;border-top:1px dashed var(--line);padding-top:11px;}
+  .guard b{color:var(--acc);}
+  footer{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .synthetic{font-size:11px;color:var(--amber);}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(30px);background:var(--panel2);
+    border:1px solid var(--acc);color:var(--text);padding:11px 20px;border-radius:10px;font-size:13px;opacity:0;
+    transition:.3s;box-shadow:0 10px 30px rgba(0,0,0,.4);pointer-events:none;z-index:50;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <div class="logo">⇄</div>
+      <div>
+        <h1>Bank ↔ System Reconciliation — AI Exception Engine</h1>
+        <p>Live matching of bank statement lines against system transactions · surfaces exceptions only · medallion (Bronze→Silver→Gold) lakehouse pattern</p>
+      </div>
+    </div>
+    <div class="byline">
+      <b>Anthony Apollis</b> · Senior BI Developer<br>
+      Data &amp; Analytics Engineering · anthony.apollis@gmail.com
+    </div>
+  </header>
+
+  <div class="gov">
+    <span class="k">🛡️</span>
+    <div><b>Governed AI, no hallucination.</b> The agent reads <b>only the governed Gold reconciliation dataset</b> — never production. Every explanation is traceable to a specific bank/system row and a deterministic rule. Where no matching row exists, it says so — it does not invent one.</div>
+  </div>
+
+  <div class="medallion">
+    <div class="stage b"><div class="tag">Bronze · raw</div><div class="ttl">Ingest</div><div class="sub">Bank statement feed + system transaction extract land as-is via the pipeline.</div></div>
+    <div class="stage s"><div class="tag">Silver · clean</div><div class="ttl">Normalise &amp; flag</div><div class="sub">Standardise references, amounts, dates. Apply DQ rules + exception flags. Tag PII.</div></div>
+    <div class="stage g"><div class="tag">Gold · trusted</div><div class="ttl">Recon marts</div><div class="sub">Matched / partial / unmatched register — the single source of truth for finance + AI.</div></div>
+    <div class="stage ai"><div class="tag">AI + BI</div><div class="ttl">Explain &amp; act</div><div class="sub">Exception dashboard + AI agent that narrates each break with full provenance.</div></div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+  <div class="sumbar" id="sumbar" title="Matched / Partial / Exceptions"><div class="sb-m" style="width:0"></div><div class="sb-p" style="width:0"></div><div class="sb-e" style="width:0"></div></div>
+
+  <div class="controls">
+    <button class="btn" id="runBtn">▶ Run reconciliation</button>
+    <div class="ctl">
+      <div class="top"><span>Amount tolerance</span><b id="amtVal">R0.01</b></div>
+      <input id="amtTol" type="range" min="0" max="5000" step="1" value="0">
+    </div>
+    <div class="ctl">
+      <div class="top"><span>Date window</span><b id="dateVal">2 days</b></div>
+      <input id="dateWin" type="range" min="0" max="14" step="1" value="2">
+    </div>
+    <label class="switch"><input type="checkbox" id="fuzzy" checked> Fuzzy reference matching</label>
+    <div style="margin-left:auto;color:var(--acc);font-weight:700;font-size:12.5px;" id="status">Ready</div>
+  </div>
+
+  <div class="databar">
+    <span class="lab">Data:</span>
+    <button class="btn ghost" id="sampleBtn">↺ Load sample</button>
+    <button class="btn ghost" id="bankUp">⬆ Upload bank CSV</button>
+    <button class="btn ghost" id="sysUp">⬆ Upload system CSV</button>
+    <input type="file" id="bankFile" accept=".csv"><input type="file" id="sysFile" accept=".csv">
+    <span class="hint">CSV columns: <span class="mono">ref, date, amount</span> — or just click a row's amount below to edit it live.</span>
+    <div class="search">🔎<input id="search" placeholder="Search reference…"></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>
+        Reconciliation register
+        <div class="filters" id="filters">
+          <button class="fbtn active" data-f="all">All</button>
+          <button class="fbtn" data-f="MATCHED">Matched</button>
+          <button class="fbtn" data-f="PARTIAL">Partial</button>
+          <button class="fbtn" data-f="EXCEPTION">Exceptions</button>
+        </div>
+      </h2>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Status</th><th>Bank ref</th><th>System ref</th><th>Date</th><th class="amt">Bank R</th><th class="amt">System R</th><th class="amt">Δ R</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card ai">
+      <div class="head"><span class="dot"></span><b>AI Reconciliation Agent</b></div>
+      <div class="body" id="ai">
+        <div class="empty">Select any row — especially an <b style="color:var(--red)">exception</b> — and the agent explains the break, cites the exact source rows, and offers workflow actions. Try dragging the tolerance slider, editing an amount, or uploading your own CSV.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="synthetic">⚠ Synthetic demonstration data — illustrative references, amounts and dates, not real financial records.</span>
+    <span>Stack: lakehouse medallion · Data Factory · Power BI · Python · AI agent with guardrails</span>
+  </footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ---------- default synthetic data ----------
+function buildSample(){
+  const bank=[], system=[]; let bid=1, sid=1;
+  const d=(n)=>`2026-07-${String(n).padStart(2,'0')}`;
+  function pair(ref,sref,date,bamt,samt,bdesc,stype){
+    bank.push({id:'B'+bid++,date,ref,desc:bdesc,amount:bamt});
+    if(sref!==null) system.push({id:'S'+sid++,date:d(Math.min(31,parseInt(date.slice(-2))+(Math.random()<.3?1:0))),ref:sref,type:stype,amount:samt});
+  }
+  const clean=[[4471,120000],[4472,55000],[4519,89950],[4520,240000],[4533,17500],[4560,63000],[4577,150000],[4588,42000],
+    [4601,318000],[4622,9900],[4633,205000],[4644,76500],[4661,134000],[4672,58800],[4688,29900],[4701,412000]];
+  clean.forEach((c,i)=>pair('PAY-'+c[0],'PAY-'+c[0],d(2+i%20),c[1]/100,c[1]/100,'Payment settlement','SETTLE'));
+  pair('PAYOUT-7781 SETTLE','PO7781',d(6),1875.50,1875.50,'Payout settlement','PAYOUT');
+  pair('MERCHANT DEP 8842','DEP-8842',d(9),9420.00,9420.00,'Merchant deposit','MERCH_DEP');
+  pair('PAY 4990 CR','PAY-4990',d(12),2600.00,2600.00,'Payment settlement','SETTLE');
+  pair('PAY-4711','PAY-4711',d(7),5000.00,4985.00,'Payment settlement','SETTLE');
+  pair('MERCHANT DEP 8907','DEP-8907',d(11),33000.00,30000.00,'Merchant deposit','MERCH_DEP');
+  pair('PAYOUT-7820 SETTLE','PO7820',d(14),1200.00,1250.00,'Payout settlement','PAYOUT');
+  bank.push({id:'B'+bid++,date:d(8),ref:'UNREFERENCED EFT 55231',desc:'Unreferenced EFT credit',amount:14750.00});
+  bank.push({id:'B'+bid++,date:d(15),ref:'PAY-4998',desc:'Payment settlement',amount:7300.00});
+  system.push({id:'S'+sid++,date:d(15),ref:'PAY-5010',type:'SETTLE',amount:8800.00});
+  system.push({id:'S'+sid++,date:d(16),ref:'PO7899',type:'PAYOUT',amount:2100.00});
+  bank.push({id:'B'+bid++,date:d(3),ref:'PAY-4472',desc:'Payment settlement (DUPLICATE?)',amount:550.00});
+  return {bank,system};
+}
+let DATA = buildSample();
+let RES_MAP = {};   // resolutions survive re-runs: {key: 'RESOLVED'|'ASSIGNED'|'WRITTEN OFF'}
+
+// ---------- matching engine ----------
+const norm=(r)=>(String(r).match(/\d+/g)||[]).join('');
+function reconcile(){
+  const amtTol=+document.getElementById('amtTol').value||0;
+  const win=+document.getElementById('dateWin').value||0;
+  const useFuzzy=document.getElementById('fuzzy').checked;
+  const sysUsed=new Set(), results=[], seen={};
+  DATA.bank.forEach(b=>{
+    const bcore=norm(b.ref);
+    const dupKey=b.ref.replace(/\(duplicate\??\)/i,'').trim()+'|'+b.amount+'|'+b.date;
+    const isDup=seen[dupKey]; seen[dupKey]=true;
+    let cands=DATA.system.filter(s=>!sysUsed.has(s.id)&&s.ref.toUpperCase()===b.ref.toUpperCase());
+    let fuzzy=false;
+    if(cands.length===0&&useFuzzy&&bcore){cands=DATA.system.filter(s=>!sysUsed.has(s.id)&&norm(s.ref)===bcore);fuzzy=cands.length>0;}
+    if(isDup){results.push({status:'EXCEPTION',kind:'DUPLICATE',b,s:null,delta:null,fuzzy:false});return;}
+    if(cands.length===0){results.push({status:'EXCEPTION',kind:'BANK_ONLY',b,s:null,delta:null,fuzzy:false});return;}
+    cands.sort((x,y)=>Math.abs(x.amount-b.amount)-Math.abs(y.amount-b.amount));
+    const s=cands[0]; sysUsed.add(s.id);
+    const delta=+(b.amount-s.amount).toFixed(2);
+    const dgap=Math.abs((new Date(b.date)-new Date(s.date))/86400000);
+    if(Math.abs(delta)<=amtTol&&dgap<=win) results.push({status:'MATCHED',kind:fuzzy?'FUZZY':'EXACT',b,s,delta,fuzzy});
+    else if(Math.abs(delta)>amtTol) results.push({status:'PARTIAL',kind:'AMOUNT_BREAK',b,s,delta,fuzzy});
+    else results.push({status:'PARTIAL',kind:'TIMING',b,s,delta,fuzzy});
+  });
+  DATA.system.filter(s=>!sysUsed.has(s.id)).forEach(s=>results.push({status:'EXCEPTION',kind:'SYSTEM_ONLY',b:null,s,delta:null,fuzzy:false}));
+  return results;
+}
+const keyOf=(r)=> (r.b?r.b.id:'')+'|'+(r.s?r.s.id:'');
+const closed=(r)=>['RESOLVED','WRITTEN OFF'].includes(RES_MAP[keyOf(r)]);
+
+// ---------- state + render ----------
+let RESULTS=[], FILTER='all', SEL=null, SEARCH='';
+const fmt=(n)=> n==null?'—':n.toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2});
+function pill(r){
+  if(r.status==='MATCHED') return `<span class="pill ${r.fuzzy?'p-fuzzy':'p-match'}">${r.fuzzy?'MATCHED · FUZZY':'MATCHED'}</span>`;
+  if(r.status==='PARTIAL') return `<span class="pill p-partial">PARTIAL</span>`;
+  return `<span class="pill p-exc">EXCEPTION</span>`;
+}
+function resTag(r){
+  const v=RES_MAP[keyOf(r)]; if(!v) return '';
+  const c=v==='RESOLVED'?'rt-res':v==='ASSIGNED'?'rt-assign':'rt-wo';
+  return `<span class="rtag ${c}">${v}</span>`;
+}
+function renderKPIs(){
+  const total=RESULTS.length;
+  const matched=RESULTS.filter(r=>r.status==='MATCHED').length;
+  const partial=RESULTS.filter(r=>r.status==='PARTIAL'&&!closed(r)).length;
+  const openExc=RESULTS.filter(r=>r.status==='EXCEPTION'&&!closed(r)).length;
+  const rate=total?Math.round(matched/total*100):0;
+  let risk=0;
+  RESULTS.forEach(r=>{ if(closed(r))return;
+    if(r.status==='PARTIAL')risk+=Math.abs(r.delta||0);
+    if(r.status==='EXCEPTION')risk+=Math.abs(r.b?r.b.amount:r.s.amount); });
+  document.getElementById('kpis').innerHTML=`
+    <div class="kpi"><div class="n">${DATA.bank.length}/${DATA.system.length}</div><div class="l">Bank / System lines</div></div>
+    <div class="kpi green"><div class="n">${rate}%</div><div class="l">Auto-match rate</div></div>
+    <div class="kpi amber"><div class="n">${partial}</div><div class="l">Partial breaks</div></div>
+    <div class="kpi red"><div class="n">${openExc}</div><div class="l">Open exceptions</div></div>
+    <div class="kpi red"><div class="n">R${fmt(risk)}</div><div class="l">Value at risk</div></div>`;
+  // summary bar
+  const p=RESULTS.filter(r=>r.status==='PARTIAL').length, e=RESULTS.filter(r=>r.status==='EXCEPTION').length;
+  const sb=document.getElementById('sumbar').children;
+  sb[0].style.width=(matched/total*100||0)+'%'; sb[1].style.width=(p/total*100||0)+'%'; sb[2].style.width=(e/total*100||0)+'%';
+}
+function renderRows(){
+  const body=document.getElementById('rows');
+  const list=RESULTS.map((r,i)=>({r,i})).filter(({r})=>{
+    if(FILTER!=='all'&&r.status!==FILTER) return false;
+    if(SEARCH){const s=SEARCH.toLowerCase(); return (r.b&&r.b.ref.toLowerCase().includes(s))||(r.s&&r.s.ref.toLowerCase().includes(s));}
+    return true;
+  });
+  body.innerHTML=list.map(({r,i})=>`
+    <tr data-i="${i}" class="${SEL===i?'sel':''} ${closed(r)?'closed':''}">
+      <td>${pill(r)}${resTag(r)}</td>
+      <td class="mono">${r.b?r.b.ref:'—'}</td>
+      <td class="mono">${r.s?r.s.ref:'—'}</td>
+      <td class="mono">${r.b?r.b.date:r.s.date}</td>
+      <td class="amt">${r.b?`<span class="edit" contenteditable data-side="b" data-id="${r.b.id}">${fmt(r.b.amount)}</span>`:'—'}</td>
+      <td class="amt">${r.s?`<span class="edit" contenteditable data-side="s" data-id="${r.s.id}">${fmt(r.s.amount)}</span>`:'—'}</td>
+      <td class="amt" style="color:${r.delta?'var(--amber)':'var(--muted)'}">${r.delta?fmt(r.delta):'—'}</td>
+    </tr>`).join('');
+  // row select (ignore clicks on editable cells)
+  body.querySelectorAll('tr').forEach(tr=>tr.onclick=(e)=>{ if(e.target.classList.contains('edit'))return; SEL=+tr.dataset.i; renderRows(); renderAI(); });
+  // inline edit
+  body.querySelectorAll('.edit').forEach(el=>{
+    el.onkeydown=(e)=>{ if(e.key==='Enter'){e.preventDefault(); el.blur();} };
+    el.onblur=()=>{
+      const v=parseFloat(el.textContent.replace(/[^\d.-]/g,''));
+      const arr=el.dataset.side==='b'?DATA.bank:DATA.system;
+      const rec=arr.find(x=>x.id===el.dataset.id);
+      if(rec&&!isNaN(v)&&v!==rec.amount){ rec.amount=v; toast('Amount edited — reconciliation re-run'); rerun(true); }
+      else renderRows();
+    };
+  });
+}
+function renderAI(){
+  const el=document.getElementById('ai'); if(SEL===null)return;
+  const r=RESULTS[SEL], src=r.b, sys=r.s; let verdict,colour,narrative,action;
+  if(r.status==='MATCHED'){colour='var(--green)';
+    verdict=r.fuzzy?'✓ Matched (fuzzy reference)':'✓ Matched — clean';
+    narrative=r.fuzzy?`Bank reference <b>${src.ref}</b> and system reference <b>${sys.ref}</b> are formatted differently but share the numeric core <b>${norm(src.ref)}</b>. Amounts agree to the cent and dates fall inside the window — confidently the same transaction.`
+      :`Bank reference <b>${src.ref}</b> ties exactly to system reference <b>${sys.ref}</b>, amounts agree to the cent, dates align. No action required.`;
+    action='No action — auto-cleared to the Gold reconciled register.';
+  } else if(r.status==='PARTIAL'){colour='var(--amber)';
+    const sign=r.delta>0?'higher':'lower';
+    verdict='△ Partial — '+(r.kind==='AMOUNT_BREAK'?'amount break':'timing difference');
+    narrative=r.kind==='AMOUNT_BREAK'?`References match (<b>${src.ref}</b> ↔ <b>${sys.ref}</b>) but the bank amount is <b>R${fmt(Math.abs(r.delta))}</b> ${sign} than the system amount. In high-volume payment flows this is typically a settlement fee or partial pay-out — not a missing transaction. The cause is <b>not</b> guessed; the exact gap is flagged for a human.`
+      :`Reference and amount agree, but dates differ by more than the ${document.getElementById('dateWin').value}-day window — a timing / in-transit difference rather than a true break.`;
+    action=r.kind==='AMOUNT_BREAK'?'Route to Finance with the R'+fmt(Math.abs(r.delta))+' delta pre-filled. Likely fee/partial — confirm and post an adjustment.':'Auto-clears once the later-dated leg lands, or widen the date window.';
+  } else {colour='var(--red)';
+    if(r.kind==='BANK_ONLY'){verdict='✕ Exception — on bank, missing in system';
+      narrative=`Bank line <b>${src.ref}</b> for <b>R${fmt(src.amount)}</b> has <b>no</b> matching system transaction — exact and numeric-core matches were checked, none found. A system record is not fabricated to force a match.`;
+      action='Investigate as an unrecorded receipt: was the system capture missed, or the funds misallocated?';}
+    else if(r.kind==='SYSTEM_ONLY'){verdict='✕ Exception — in system, not on bank';
+      narrative=`System transaction <b>${sys.ref}</b> for <b>R${fmt(sys.amount)}</b> has not appeared on the bank statement — usually unsettled or in transit.`;
+      action='Hold on the exception register; auto-clears when the bank leg lands. Escalate if it ages beyond SLA.';}
+    else {verdict='✕ Exception — duplicate bank line';
+      narrative=`Bank line <b>${src.ref}</b> repeats a reference, amount and date already reconciled. Treated as a duplicate to protect the finance numbers from double-counting.`;
+      action='Suppress from settlement and confirm with the bank-feed owner.';}
+  }
+  const isExc=r.status!=='MATCHED', cur=RES_MAP[keyOf(r)];
+  el.innerHTML=`
+    <div class="verdict" style="color:${colour}">${verdict}</div>
+    <p>${narrative}</p>
+    <div class="prov">
+      <div class="h">Provenance — source rows cited</div>
+      <div class="row"><span>Bank row</span><span class="mono">${src?src.id+' · '+src.ref+' · R'+fmt(src.amount)+' · '+src.date:'none found'}</span></div>
+      <div class="row"><span>System row</span><span class="mono">${sys?sys.id+' · '+sys.ref+' · R'+fmt(sys.amount)+' · '+sys.date:'none found'}</span></div>
+      <div class="row"><span>Rule applied</span><span class="mono">${r.kind}</span></div>
+      ${r.delta!=null?`<div class="row"><span>Amount Δ</span><span class="mono">R${fmt(r.delta)}</span></div>`:''}
+    </div>
+    <div class="action"><b>Recommended action:</b><br>${action}</div>
+    ${isExc?`<div class="wf">
+      <button class="w-res" onclick="resolve('RESOLVED')">✓ Resolve</button>
+      <button class="w-assign" onclick="resolve('ASSIGNED')">→ Assign to Finance</button>
+      <button class="w-wo" onclick="resolve('WRITTEN OFF')">✕ Write-off</button>
+    </div>${cur?`<div class="hint" style="margin-top:8px">Current status: <b style="color:var(--text)">${cur}</b> · <a href="#" onclick="resolve(null);return false;" style="color:var(--acc)">clear</a></div>`:''}`:''}
+    <div class="guard"><b>Guardrail:</b> generated only from the two rows above and the deterministic rule <span class="mono">${r.kind}</span>. Where no system row exists, the agent states “none found” rather than inventing one.</div>`;
+}
+window.resolve=(label)=>{
+  const r=RESULTS[SEL]; if(!r)return;
+  if(label===null) delete RES_MAP[keyOf(r)]; else RES_MAP[keyOf(r)]=label;
+  toast(label?('Marked '+label):'Status cleared');
+  renderKPIs(); renderRows(); renderAI();
+};
+
+// ---------- CSV ----------
+function parseCSV(text,isBank){
+  const lines=text.trim().split(/\r?\n/).filter(x=>x.trim());
+  const head=lines[0].split(',').map(h=>h.trim().toLowerCase());
+  const ri=head.indexOf('ref'), di=head.indexOf('date'), ai=head.indexOf('amount');
+  if(ri<0||di<0||ai<0){toast('CSV needs headers: ref, date, amount');return null;}
+  const out=[]; let n=1;
+  for(let i=1;i<lines.length;i++){const c=lines[i].split(',');
+    out.push({id:(isBank?'B':'S')+(n++),ref:(c[ri]||'').trim(),date:(c[di]||'').trim(),amount:parseFloat((c[ai]||'').replace(/[^\d.-]/g,''))||0, desc:'Imported', type:'IMPORT'});}
+  return out;
+}
+
+// ---------- misc ----------
+let toastT;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2000);}
+function rerun(keepSel){
+  const prevKey=keepSel&&SEL!=null?keyOf(RESULTS[SEL]):null;
+  document.getElementById('status').textContent='Reconciling…';
+  RESULTS=reconcile();
+  SEL = prevKey? RESULTS.findIndex(r=>keyOf(r)===prevKey) : null; if(SEL<0)SEL=null;
+  renderKPIs(); renderRows();
+  if(SEL!=null) renderAI();
+  const e=RESULTS.filter(r=>r.status==='EXCEPTION'&&!closed(r)).length, p=RESULTS.filter(r=>r.status==='PARTIAL'&&!closed(r)).length;
+  document.getElementById('status').textContent=`Done · ${e} open exceptions, ${p} partials`;
+}
+
+// ---------- wiring ----------
+const amt=document.getElementById('amtTol'), dw=document.getElementById('dateWin');
+amt.oninput=()=>{document.getElementById('amtVal').textContent='R'+(+amt.value).toFixed(2);rerun(true);};
+dw.oninput=()=>{document.getElementById('dateVal').textContent=dw.value+' day'+(dw.value==1?'':'s');rerun(true);};
+document.getElementById('fuzzy').onchange=()=>rerun(true);
+document.getElementById('runBtn').onclick=()=>rerun(true);
+document.getElementById('search').oninput=(e)=>{SEARCH=e.target.value;renderRows();};
+document.getElementById('filters').querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');FILTER=b.dataset.f;renderRows();});
+document.getElementById('sampleBtn').onclick=()=>{DATA=buildSample();RES_MAP={};toast('Sample data loaded');rerun(false);};
+document.getElementById('bankUp').onclick=()=>document.getElementById('bankFile').click();
+document.getElementById('sysUp').onclick=()=>document.getElementById('sysFile').click();
+document.getElementById('bankFile').onchange=(e)=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const p=parseCSV(rd.result,true);if(p){DATA.bank=p;RES_MAP={};toast('Bank CSV loaded ('+p.length+' rows)');rerun(false);}};rd.readAsText(f);};
+document.getElementById('sysFile').onchange=(e)=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const p=parseCSV(rd.result,false);if(p){DATA.system=p;RES_MAP={};toast('System CSV loaded ('+p.length+' rows)');rerun(false);}};rd.readAsText(f);};
+
+rerun(false);
+</script>
+</body>
+</html>
