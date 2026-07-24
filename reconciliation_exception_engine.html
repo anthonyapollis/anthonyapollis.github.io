@@ -133,6 +133,19 @@
     border:1px solid var(--acc);color:var(--text);padding:11px 20px;border-radius:10px;font-size:13px;opacity:0;
     transition:.3s;box-shadow:0 10px 30px rgba(0,0,0,.4);pointer-events:none;z-index:50;}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .modal-bg{position:fixed;inset:0;background:rgba(20,30,45,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:100;}
+  .modal-bg.show{display:flex;}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:14px;width:660px;max-width:94vw;max-height:90vh;overflow:auto;box-shadow:0 20px 60px rgba(20,30,45,.3);}
+  .modal h3{font-size:16px;font-weight:800;padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+  .modal .x{cursor:pointer;color:var(--muted);font-size:18px;}
+  .mbody{padding:18px 20px;}
+  .note{font-size:12.5px;color:var(--muted);line-height:1.55;margin-bottom:14px;}
+  .maprow{display:grid;grid-template-columns:170px 1fr;gap:12px;align-items:center;margin-bottom:11px;font-size:13px;}
+  .maprow select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--panel2);color:var(--text);font-size:13px;}
+  .prev{margin-top:14px;border:1px solid var(--line);border-radius:8px;overflow:auto;max-height:180px;}
+  .prev th{position:static;} .prev th,.prev td{padding:6px 10px;white-space:nowrap;font-size:11.5px;}
+  .mopt{display:flex;align-items:center;gap:9px;margin-top:16px;font-size:13px;color:var(--text);cursor:pointer;}
+  .mfoot{display:flex;justify-content:flex-end;gap:10px;padding:14px 20px;border-top:1px solid var(--line);}
 </style>
 </head>
 <body>
@@ -148,7 +161,8 @@
     </div>
     <div class="byline">
       <b>Anthony Apollis</b> · Senior BI Developer<br>
-      Data &amp; Analytics Engineering · anthony.apollis@gmail.com
+      Data &amp; Analytics Engineering · anthony.apollis@gmail.com<br>
+      <a href="https://github.com/anthonyapollis/anthonyapollis.github.io/blob/main/reconciliation_exception_engine.html" target="_blank" rel="noopener" style="color:var(--acc);text-decoration:none;font-weight:700;">&lt;/&gt; View source on GitHub ↗</a>
     </div>
   </header>
 
@@ -187,7 +201,7 @@
     <button class="btn ghost" id="bankUp">⬆ Upload bank CSV</button>
     <button class="btn ghost" id="sysUp">⬆ Upload system CSV</button>
     <input type="file" id="bankFile" accept=".csv"><input type="file" id="sysFile" accept=".csv">
-    <span class="hint">CSV columns: <span class="mono">ref, date, amount</span> — or just click a row's amount below to edit it live.</span>
+    <span class="hint">Upload a real bank/system CSV — I'll help you map the columns (Capitec, etc.). Or click any amount below to edit it live.</span>
     <div class="search">🔎<input id="search" placeholder="Search reference…"></div>
   </div>
 
@@ -204,7 +218,7 @@
       </h2>
       <div class="tblwrap">
         <table>
-          <thead><tr><th>Status</th><th>Bank ref</th><th>System ref</th><th>Date</th><th class="amt">Bank R</th><th class="amt">System R</th><th class="amt">Δ R</th></tr></thead>
+          <thead><tr><th>Status</th><th>Bank ref</th><th>System ref</th><th>Date</th><th class="amt">Bank R</th><th class="amt">System R</th><th class="amt">Δ R<br><span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:9.5px;">Bank − System</span></th></tr></thead>
           <tbody id="rows"></tbody>
         </table>
       </div>
@@ -224,6 +238,25 @@
   </footer>
 </div>
 <div class="toast" id="toast"></div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3><span id="modalTitle">Map your statement columns</span><span class="x" id="modalX">✕</span></h3>
+    <div class="mbody">
+      <div class="note" id="modalNote"></div>
+      <div class="maprow"><label>Date column</label><select id="mDate"></select></div>
+      <div class="maprow"><label>Reference / description</label><select id="mRef"></select></div>
+      <div class="maprow"><label>Amount (or Money In)</label><select id="mAmt"></select></div>
+      <div class="maprow"><label>Minus (Money Out)</label><select id="mMinus"></select></div>
+      <div class="prev" id="mPrev"></div>
+      <label class="mopt" id="genWrap"><input type="checkbox" id="mGen" checked> Also generate a matching system extract so I can see reconciliation immediately</label>
+    </div>
+    <div class="mfoot">
+      <button class="btn ghost" id="mCancel">Cancel</button>
+      <button class="btn" id="mImport">Import &amp; reconcile</button>
+    </div>
+  </div>
+</div>
 
 <script>
 // ---------- default synthetic data ----------
@@ -399,17 +432,69 @@ window.resolve=(label)=>{
   renderKPIs(); renderRows(); renderAI();
 };
 
-// ---------- CSV ----------
-function parseCSV(text,isBank){
-  const lines=text.trim().split(/\r?\n/).filter(x=>x.trim());
-  const head=lines[0].split(',').map(h=>h.trim().toLowerCase());
-  const ri=head.indexOf('ref'), di=head.indexOf('date'), ai=head.indexOf('amount');
-  if(ri<0||di<0||ai<0){toast('CSV needs headers: ref, date, amount');return null;}
-  const out=[]; let n=1;
-  for(let i=1;i<lines.length;i++){const c=lines[i].split(',');
-    out.push({id:(isBank?'B':'S')+(n++),ref:(c[ri]||'').trim(),date:(c[di]||'').trim(),amount:parseFloat((c[ai]||'').replace(/[^\d.-]/g,''))||0, desc:'Imported', type:'IMPORT'});}
-  return out;
+// ---------- user-friendly CSV import (handles real bank statements) ----------
+function splitCSVLine(line){const out=[];let cur='',q=false;
+  for(let i=0;i<line.length;i++){const c=line[i];
+    if(q){ if(c==='"'){ if(line[i+1]==='"'){cur+='"';i++;} else q=false;} else cur+=c;}
+    else { if(c==='"')q=true; else if(c===','){out.push(cur);cur='';} else cur+=c;}}
+  out.push(cur); return out.map(s=>s.trim());}
+function parseRows(text){return text.replace(/\r/g,'').split('\n').filter(l=>l.trim().length).map(splitCSVLine);}
+function findHeader(rows){const dRe=/date/i, aRe=/amount|debit|credit|money|value|balance/i;
+  for(let i=0;i<Math.min(rows.length,20);i++){const r=rows[i].map(x=>x.toLowerCase());
+    if(r.some(x=>dRe.test(x))&&r.some(x=>aRe.test(x))) return i;} return 0;}
+function parseAmount(s){ if(s==null)return NaN; s=String(s).replace(/[^\d.,-]/g,'').trim(); if(!s)return NaN;
+  if(s.includes(',')&&s.includes('.')) s=s.replace(/,/g,'');
+  else if(s.includes(',')){const p=s.split(','); if(p[p.length-1].length===2) s=p.join('.'); else s=s.replace(/,/g,'');}
+  return parseFloat(s);}
+function normDate(s){ if(!s)return''; s=String(s).trim();
+  let m=s.match(/(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/); if(m)return `${m[1]}-${m[2].padStart(2,'0')}-${m[3].padStart(2,'0')}`;
+  m=s.match(/(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})/); if(m)return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;
+  return s;}
+const guess=(hs,res)=>{for(const re of res){const i=hs.findIndex(h=>re.test(h)); if(i>=0)return i;} return -1;};
+
+let PENDING=null;
+function openMapper(text,target){
+  const rows=parseRows(text); if(rows.length<2){toast('That file has no readable rows.');return;}
+  const hi=findHeader(rows); const headers=rows[hi]; const dataRows=rows.slice(hi+1);
+  PENDING={headers,dataRows,target};
+  const opts=(sel,none)=>{sel.innerHTML=(none?'<option value="-1">— none —</option>':'')+headers.map((h,i)=>`<option value="${i}">${h||('col '+(i+1))}</option>`).join('');};
+  const mD=document.getElementById('mDate'),mR=document.getElementById('mRef'),mA=document.getElementById('mAmt'),mM=document.getElementById('mMinus');
+  opts(mD,false);opts(mR,false);opts(mA,false);opts(mM,true);
+  const low=headers.map(h=>h.toLowerCase());
+  mD.value=Math.max(0,guess(low,[/date/]));
+  mR.value=Math.max(0,guess(low,[/descrip/,/reference/,/narrative/,/detail/,/payee/,/ref/]));
+  const inI=guess(low,[/money in/,/credit/,/deposit/,/received/]);
+  const outI=guess(low,[/money out/,/debit/,/withdraw/,/paid/]);
+  const single=guess(low,[/^amount$/,/\bamount\b/,/value/,/transaction amount/]);
+  if(inI>=0&&outI>=0){mA.value=inI;mM.value=outI;} else {mA.value=Math.max(0,single>=0?single:guess(low,[/amount|credit|debit|value/]));mM.value=-1;}
+  document.getElementById('modalTitle').textContent = target==='bank'?'Map your bank statement':'Map your system extract';
+  document.getElementById('modalNote').innerHTML = `Detected the header on row ${hi+1}: ${headers.length} columns, ${dataRows.length} data rows. I auto-guessed the mapping — adjust if needed. When both Money In and Money Out are set, amount = <b>In − Out</b>.`;
+  document.getElementById('genWrap').style.display = target==='bank'?'flex':'none';
+  updatePreview();
+  [mD,mR,mA,mM].forEach(s=>s.onchange=updatePreview);
+  document.getElementById('modalBg').classList.add('show');
 }
+function currentMap(){return{date:+document.getElementById('mDate').value,ref:+document.getElementById('mRef').value,amt:+document.getElementById('mAmt').value,minus:+document.getElementById('mMinus').value};}
+function buildFromMapping(){const m=currentMap();const out=[];let n=1;const pre=PENDING.target==='bank'?'B':'S';
+  PENDING.dataRows.forEach(r=>{let amt=parseAmount(r[m.amt]); if(m.minus>=0){const mo=parseAmount(r[m.minus]); if(!isNaN(mo)&&mo) amt=(isNaN(amt)?0:amt)-Math.abs(mo);} if(isNaN(amt))return;
+    const ref=(m.ref>=0&&r[m.ref])?r[m.ref]:('LINE-'+n); const date=m.date>=0?normDate(r[m.date]):'';
+    out.push({id:pre+(n++),ref:String(ref).slice(0,42),date,amount:+amt.toFixed(2),desc:'Imported',type:'IMPORT'});});
+  return out;}
+function updatePreview(){const rows=buildFromMapping().slice(0,5);
+  document.getElementById('mPrev').innerHTML=`<table><thead><tr><th>Ref</th><th>Date</th><th class="amt">Amount</th></tr></thead><tbody>${rows.map(r=>`<tr><td class="mono">${r.ref}</td><td class="mono">${r.date}</td><td class="amt">${fmt(r.amount)}</td></tr>`).join('')||'<tr><td colspan=3 style="color:var(--muted);padding:10px">No numeric rows detected — check the Amount column.</td></tr>'}</tbody></table>`;}
+function genSystem(bankRows){const sys=[];let n=1;
+  bankRows.forEach(b=>{const r=Math.random(); if(r<0.08)return; let amt=b.amount; if(r>0.93) amt=+(amt*(0.90+Math.random()*0.06)).toFixed(2);
+    sys.push({id:'S'+(n++),ref:b.ref,date:b.date,amount:amt,type:'IMPORT'});});
+  for(let k=0;k<2;k++) sys.push({id:'S'+(n++),ref:'SYS-ONLY-'+(1000+k),date:(bankRows[0]&&bankRows[0].date)||'',amount:+(Math.random()*5000+500).toFixed(2),type:'IMPORT'});
+  return sys;}
+function doImport(){const built=buildFromMapping(); if(!built.length){toast('No rows imported — check the Amount mapping.');return;}
+  if(PENDING.target==='bank'){DATA.bank=built; if(document.getElementById('mGen').checked) DATA.system=genSystem(built);}
+  else DATA.system=built;
+  RES_MAP={}; document.getElementById('modalBg').classList.remove('show');
+  toast(`Imported ${built.length} ${PENDING.target} rows`); rerun(false);}
+document.getElementById('mImport').onclick=doImport;
+document.getElementById('mCancel').onclick=()=>document.getElementById('modalBg').classList.remove('show');
+document.getElementById('modalX').onclick=()=>document.getElementById('modalBg').classList.remove('show');
 
 // ---------- misc ----------
 let toastT;
@@ -437,8 +522,8 @@ document.getElementById('filters').querySelectorAll('.fbtn').forEach(b=>b.onclic
 document.getElementById('sampleBtn').onclick=()=>{DATA=buildSample();RES_MAP={};toast('Sample data loaded');rerun(false);};
 document.getElementById('bankUp').onclick=()=>document.getElementById('bankFile').click();
 document.getElementById('sysUp').onclick=()=>document.getElementById('sysFile').click();
-document.getElementById('bankFile').onchange=(e)=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const p=parseCSV(rd.result,true);if(p){DATA.bank=p;RES_MAP={};toast('Bank CSV loaded ('+p.length+' rows)');rerun(false);}};rd.readAsText(f);};
-document.getElementById('sysFile').onchange=(e)=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const p=parseCSV(rd.result,false);if(p){DATA.system=p;RES_MAP={};toast('System CSV loaded ('+p.length+' rows)');rerun(false);}};rd.readAsText(f);};
+document.getElementById('bankFile').onchange=(e)=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>openMapper(rd.result,'bank');rd.readAsText(f);e.target.value='';};
+document.getElementById('sysFile').onchange=(e)=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>openMapper(rd.result,'system');rd.readAsText(f);e.target.value='';};
 
 rerun(false);
 </script>
