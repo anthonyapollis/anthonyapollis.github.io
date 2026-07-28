@@ -151,6 +151,32 @@ footer p{font-size:12px;color:var(--muted2)}
 /* ─── SCROLL ANIMATIONS ─── */
 .fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .fade-in.visible{opacity:1;transform:none}
+
+/* ─── Q&A ASSISTANT WIDGET ─── */
+#qa-toggle{
+  position:fixed;bottom:22px;right:22px;z-index:200;background:var(--blue);color:#fff;
+  border:none;border-radius:30px;padding:13px 20px;font-size:13px;font-weight:700;
+  box-shadow:0 6px 20px rgba(59,130,246,.35);cursor:pointer;display:flex;align-items:center;gap:8px;
+}
+#qa-toggle:hover{background:var(--teal)}
+#qa-panel{
+  position:fixed;bottom:78px;right:22px;z-index:200;width:360px;max-width:92vw;max-height:70vh;
+  background:var(--card);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.5);
+  display:none;flex-direction:column;overflow:hidden;border:1px solid var(--border2);
+}
+#qa-panel.open{display:flex}
+#qa-head{background:var(--bg2);color:var(--txt);padding:13px 16px;font-size:13px;font-weight:700;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+#qa-head button{background:none;border:none;color:var(--txt2);font-size:16px;cursor:pointer;opacity:.7}
+#qa-log{flex:1;overflow-y:auto;padding:14px;font-size:12.5px;display:flex;flex-direction:column;gap:8px}
+#qa-log .bubble{padding:9px 12px;border-radius:10px;max-width:88%;line-height:1.5}
+#qa-log .bot{background:var(--card2);color:var(--txt2);align-self:flex-start}
+#qa-log .user{background:var(--blue);color:#fff;align-self:flex-end}
+#qa-chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 10px}
+#qa-chips button{font-size:10.5px;background:var(--card2);border:1px solid var(--border2);border-radius:14px;padding:5px 10px;cursor:pointer;color:var(--txt2)}
+#qa-chips button:hover{border-color:var(--blue)}
+#qa-input-row{display:flex;border-top:1px solid var(--border)}
+#qa-input{flex:1;border:none;background:var(--card);color:var(--txt);padding:11px 12px;font-size:12.5px;outline:none}
+#qa-send{background:var(--blue);color:#fff;border:none;padding:0 16px;font-weight:700;cursor:pointer;font-size:12px}
 </style>
 </head>
 <body>
@@ -1220,6 +1246,95 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+<button id="qa-toggle">&#128172; Ask about my work</button>
+<div id="qa-panel">
+  <div id="qa-head"><span>Ask about Anthony's portfolio</span><button id="qa-close">&times;</button></div>
+  <div id="qa-log"><div class="bubble bot">Hi! Ask me about my experience, tech stack, or any project in the grid above.</div></div>
+  <div id="qa-chips">
+    <button>What's your experience?</button>
+    <button>What's your tech stack?</button>
+    <button>Tell me about Pargo</button>
+    <button>How do I contact you?</button>
+  </div>
+  <div id="qa-input-row">
+    <input id="qa-input" type="text" placeholder="Ask a question...">
+    <button id="qa-send">Send</button>
+  </div>
+</div>
+<script>
+var FAQ = [
+  {q: "What's your experience?",
+   kw: ["experience", "background", "how many years", "about you", "who are you"],
+   a: "12+ years as a Data Engineer, Data Architect and Analytics Specialist based in South Africa, across 23 completed portfolio projects modelling 73M+ records with 60+ ML models built. I design data architecture from scratch - source-to-target mapping, Bronze/Silver/Gold layers, dimensional marts, SCD Type 2 history, data-quality quarantine patterns, orchestration and BI-ready semantic layers."},
+  {q: "What's your tech stack?",
+   kw: ["tech stack", "technology", "what tools", "what do you use", "skills"],
+   a: "Data warehousing: Snowflake, BigQuery, SQL Server, PostgreSQL, dimensional modelling. Engineering: Databricks/Delta, AWS S3/Glue/Athena, dbt, Airflow, Cloud Dataflow (Apache Beam), Spark/PySpark, Apache NiFi. ML: XGBoost, LightGBM, scikit-learn, MLflow, Snowpark ML. BI: Power BI, Tableau, DAX, Chart.js. Web analytics: GA4, GTM, consent mode."},
+  {q: "Tell me about Pargo",
+   kw: ["pargo", "parcel"],
+   a: "Pargo Parcel Intelligence Platform - a Snowflake and dbt data warehouse for South Africa's parcel pickup network, with PostgreSQL/Parquet ingestion, Snowflake RAW/STAGING/MARTS layers, dbt models, Snowpark-style automation, and 15 Python ML models for return-risk, forecasting, segmentation and customer value analytics."},
+  {q: "Tell me about AfriMoney",
+   kw: ["afrimoney", "remittance", "fintech corridor"],
+   a: "AfriMoney Intelligence Platform - an end-to-end Snowflake fintech data warehouse for African remittance analytics. Bronze->Silver->Gold medallion with dbt (14 models, 28 tests), Snowpark ML (Gradient Boosting + Random Forest with Model Registry), and an interactive Leaflet map modelling 17 SA-Africa corridors across R78B annual volume."},
+  {q: "Tell me about Karoo Online",
+   kw: ["karoo"],
+   a: "Karoo Online Data & Analytics Review - an interactive ecommerce intelligence report for a South African online marketplace: a real 1,000-product catalogue, a million-order behavioural dataset, four years of demand trends, marketing performance, customer lifecycle analytics, recommendation signals, and fraud/safety views."},
+  {q: "Tell me about DebtBusters",
+   kw: ["debtbusters", "debt counselling"],
+   a: "DebtBusters Intelligence Platform - a full-stack Databricks Azure data warehouse modelling the South African debt counselling lifecycle (NCA/NCR compliant). 26 PySpark notebooks across 5 medallion layers, a Kimball star schema with SHA-256 surrogate keys, ADF orchestration, and 5 ML models across lead conversion, payment default, product recommendation, credit forecast and client churn."},
+  {q: "Tell me about the GCP Marketing Analytics Platform",
+   kw: ["gcp marketing", "ga4", "google cloud"],
+   a: "GCP Marketing Analytics Platform - GA4 implementation with GTM datalayer architecture, consent mode quality validation, and a 7-query BigQuery SQL library, feeding a production medallion pipeline ingesting GA4, Google Ads, Campaign Manager 360, DV360 and YouTube via BigQuery Data Transfer Service. Cloud Dataflow (Apache Beam) validates and quarantines, dbt stages and models, Airflow orchestrates the daily DAG to a cross-channel Gold fact table."},
+  {q: "How many projects have you built?",
+   kw: ["how many projects", "number of projects", "portfolio size"],
+   a: "23 completed end-to-end projects in this portfolio, spanning Snowflake, Databricks, GCP/BigQuery, AWS, Microsoft Fabric, and traditional BI stacks - together modelling 73M+ records and 60+ ML models."},
+  {q: "How do I contact you?",
+   kw: ["contact", "email", "linkedin", "reach you", "hire you"],
+   a: "anthony.apollis@gmail.com, or github.com/anthonyapollis and linkedin.com/in/anthony-apollis - links are in the Contact section below. Currently open to Data Engineering, Data Architecture, Analytics Engineering and Senior BI roles, locally and internationally."},
+  {q: "Is the data in these projects real?",
+   kw: ["is the data", "data real", "real data", "is this real", "synthetic", "fictional companies"],
+   a: "Every project models a fictional company with synthetic data generated for the portfolio - the only exceptions are a few real public product catalogs used as a realistic base (e.g. Karoo Online's 1,000-product catalogue, Leatt's storefront). No real customer or business data is used anywhere."}
+];
+document.addEventListener("DOMContentLoaded", function () {
+  var toggle = document.getElementById("qa-toggle");
+  var panel = document.getElementById("qa-panel");
+  var log = document.getElementById("qa-log");
+  var input = document.getElementById("qa-input");
+  var send = document.getElementById("qa-send");
+
+  function addBubble(text, who) {
+    var b = document.createElement("div");
+    b.className = "bubble " + who;
+    b.textContent = text;
+    log.appendChild(b);
+    log.scrollTop = log.scrollHeight;
+  }
+  function answer(q) {
+    var ql = q.toLowerCase();
+    var best = null, bestScore = 0;
+    FAQ.forEach(function (item) {
+      var score = 0;
+      item.kw.forEach(function (k) { if (ql.indexOf(k) !== -1) score += k.length; });
+      if (score > bestScore) { bestScore = score; best = item; }
+    });
+    return best ? best.a : "I don't have a grounded answer for that yet - try asking about my experience, tech stack, a specific project name, or how to get in touch.";
+  }
+  function ask(q) {
+    if (!q.trim()) return;
+    addBubble(q, "user");
+    input.value = "";
+    setTimeout(function () { addBubble(answer(q), "bot"); }, 200);
+  }
+  if (toggle) {
+    toggle.addEventListener("click", function () { panel.classList.toggle("open"); });
+    document.getElementById("qa-close").addEventListener("click", function () { panel.classList.remove("open"); });
+    send.addEventListener("click", function () { ask(input.value); });
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") ask(input.value); });
+    document.querySelectorAll("#qa-chips button").forEach(function (btn) {
+      btn.addEventListener("click", function () { ask(btn.textContent); });
+    });
+  }
+});
 </script>
 </body>
 </html>
