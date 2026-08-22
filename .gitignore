@@ -11,3 +11,4 @@ build/animatic/*.webm
 build/animatic/*.mp4
 build/animatic/frame-*.png
 build/animatic/render.log
+build/animatic/ffmpeg2pass*
