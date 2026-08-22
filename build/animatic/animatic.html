@@ -1,0 +1,257 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Like I Never Left — Animatic</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
+body{font-family:"Helvetica Neue",Arial,sans-serif;color:#fff}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden}
+canvas{position:absolute;inset:0}
+#vig{position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(ellipse 78% 68% at 50% 46%,transparent 32%,rgba(0,0,0,.82) 100%)}
+#grain{position:absolute;inset:0;opacity:.055;pointer-events:none;mix-blend-mode:overlay}
+
+/* ---- slate ---- */
+#ui{position:absolute;inset:0;padding:92px 120px;display:flex;flex-direction:column}
+.top{display:flex;align-items:baseline;gap:28px;opacity:0;transition:opacity .5s}
+.sec{font:600 20px/1 sans-serif;letter-spacing:.34em;text-transform:uppercase;color:#C9A25E}
+.secrange{font:15px/1 ui-monospace,Menlo,monospace;color:rgba(255,255,255,.42);letter-spacing:.1em}
+.chip{margin-left:auto;font:600 12px/1 sans-serif;letter-spacing:.2em;text-transform:uppercase;
+ padding:8px 14px;border:1px solid rgba(201,162,94,.5);color:#C9A25E;border-radius:2px;opacity:0;transition:opacity .4s}
+
+.mid{flex:1;display:flex;align-items:center;gap:96px}
+.slate{flex:0 0 300px}
+.num{font:200 152px/.85 Georgia,serif;color:#C9A25E;letter-spacing:-.02em}
+.tc{font:15px/1 ui-monospace,Menlo,monospace;color:rgba(255,255,255,.5);
+ letter-spacing:.16em;margin-top:22px}
+.spec{font:14px/1.8 ui-monospace,Menlo,monospace;color:rgba(255,255,255,.72);
+ letter-spacing:.06em;margin-top:14px}
+.desc{flex:1;font:300 52px/1.34 Georgia,serif;color:#F2EFEA;max-width:1080px;
+ text-shadow:0 2px 30px rgba(0,0,0,.85)}
+.desc b{color:#C9A25E;font-weight:400}
+
+/* ---- progress ---- */
+.bot{display:flex;flex-direction:column;gap:16px}
+#bar{position:relative;height:2px;background:rgba(255,255,255,.13)}
+#fill{position:absolute;left:0;top:0;bottom:0;background:#C9A25E;width:0}
+.mk{position:absolute;top:-4px;width:1px;height:10px;background:rgba(255,255,255,.3)}
+.mk.c{background:#C9A25E;height:14px;top:-6px;width:2px}
+.blabels{display:flex;justify-content:space-between;
+ font:12px/1 ui-monospace,Menlo,monospace;color:rgba(255,255,255,.4);letter-spacing:.14em}
+
+/* ---- cards ---- */
+.card{position:absolute;inset:0;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;opacity:0;
+ transition:opacity 1.1s ease;pointer-events:none}
+.card .k{font:600 15px/1 sans-serif;letter-spacing:.4em;text-transform:uppercase;
+ color:#8A6F3F;margin-bottom:38px}
+.card h1{font:200 108px/1.06 Georgia,serif;color:#C9A25E;letter-spacing:.05em}
+.card .art{font:300 27px/1 sans-serif;letter-spacing:.26em;text-transform:uppercase;
+ color:rgba(255,255,255,.8);margin-top:32px}
+.card .sml{font:14px/2 ui-monospace,Menlo,monospace;color:rgba(255,255,255,.42);
+ letter-spacing:.16em;margin-top:56px}
+.card .rule{width:120px;height:1px;background:rgba(201,162,94,.5);margin:44px 0}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+</style></head><body>
+<div id="stage">
+  <canvas id="atm" width="1920" height="1080"></canvas>
+  <div id="vig"></div>
+  <canvas id="grain" width="480" height="270"></canvas>
+
+  <div id="ui">
+    <div class="top" id="top">
+      <span class="sec" id="sec"></span>
+      <span class="secrange" id="secr"></span>
+      <span class="chip" id="chip">Chorus Spine</span>
+    </div>
+    <div class="mid" id="mid" style="opacity:0;transition:opacity .45s">
+      <div class="slate">
+        <div class="num" id="num"></div>
+        <div class="tc" id="tc"></div>
+        <div class="spec" id="spec"></div>
+      </div>
+      <div class="desc" id="desc"></div>
+    </div>
+    <div class="bot" id="bot" style="opacity:0;transition:opacity .5s">
+      <div id="bar"><div id="fill"></div></div>
+      <div class="blabels"><span id="cur">0:00</span><span>LIKE I NEVER LEFT — ANIMATIC</span><span>3:50</span></div>
+    </div>
+  </div>
+
+  <div class="card" id="c1">
+    <div class="k">Concept Animatic</div>
+    <h1>Like I Never Left</h1>
+    <div class="art">Whitney Houston ft. Akon</div>
+    <div class="rule"></div>
+    <div class="sml">44 SHOTS &nbsp;·&nbsp; 3:50 &nbsp;·&nbsp; TIMING REFERENCE ONLY</div>
+  </div>
+
+  <div class="card" id="c2">
+    <div class="k">Disclosure</div>
+    <h1 style="font-size:62px">Concept Animatic</h1>
+    <div class="rule"></div>
+    <div class="sml" style="max-width:960px;line-height:2.2">
+      NO FOOTAGE GENERATED &nbsp;·&nbsp; NO LIKENESS DEPICTED<br>
+      TIMING AND STRUCTURE REFERENCE FOR PRE-PRODUCTION<br><br>
+      EXECUTION GATED ON ESTATE APPROVAL, MASTER LICENCE<br>AND SYNTHETIC-MEDIA DISCLOSURE
+    </div>
+  </div>
+  <div id="flash"></div>
+</div>
+
+<script>
+const SHOTS=[
+[1,0,4,"Intro","0:00–0:14","85mm · slow push","Exterior. Rain on high glass. A figure barely legible within.","cold",0],
+[2,4,5,"Intro","0:00–0:14","35mm · drift left","Rain shadows crawl across an empty room.","cold",0],
+[3,9,5,"Intro","0:00–0:14","50mm · rack focus","Her reflection in the dark glass. Not yet turned to us.","cold",0],
+[4,14,6,"Verse 1","0:14–0:42","85mm · static","She turns to camera. First vocal.","cold",0],
+[5,20,5,"Verse 1","0:14–0:42","24mm · static","Wide. She is small in the room. One warm lamp.","cold",0],
+[6,25,5,"Verse 1","0:14–0:42","100mm · macro","Hands on the ledge. A ring. City bokeh beyond.","cold",0],
+[7,30,6,"Verse 1","0:14–0:42","85mm · push","Close on the eyes. Sync.","cold",0],
+[8,36,6,"Verse 1","0:14–0:42","35mm · tracking","She walks from the window. Chandelier overhead.","cold",0],
+[9,42,5,"Pre-Chorus","0:42–0:56","35mm · static","She crosses a doorway. Amber spills from beyond.","trans",0],
+[10,47,4,"Pre-Chorus","0:42–0:56","85mm · flash insert","First memory. Six frames. Two hands almost touching.","warm",0],
+[11,51,5,"Pre-Chorus","0:42–0:56","85mm · static","The memory has landed on her face.","cold",0],
+[12,56,6,"Chorus 1","0:56–1:24","32mm · slow push","<b>Chorus Frame A.</b> She sings to camera. Rain glass, city.","cold",1],
+[13,62,5,"Chorus 1","0:56–1:24","50mm · arc left","<b>Frame B.</b> Medium, three-quarter.","cold",1],
+[14,67,6,"Chorus 1","0:56–1:24","85mm · static","Memory. Foreheads nearly touching.","warm",0],
+[15,73,5,"Chorus 1","0:56–1:24","85mm · static","<b>Frame C.</b> Close. A tear that does not fall.","cold",1],
+[16,78,6,"Chorus 1","0:56–1:24","24mm · pull back","From behind. The city fills frame. She is small.","cold",0],
+[17,84,5,"Verse 2 — Akon","1:24–1:52","35mm · static","Wet street. He stands under a streetlight.","sodium",0],
+[18,89,5,"Verse 2 — Akon","1:24–1:52","50mm · push","He sings to camera. Breath visible.","sodium",0],
+[19,94,5,"Verse 2 — Akon","1:24–1:52","85mm · static","Traffic streaks the foreground. He holds still.","sodium",0],
+[20,99,6,"Verse 2 — Akon","1:24–1:52","35mm · lateral track","He walks. Storefronts slide past.","sodium",0],
+[21,105,7,"Verse 2 — Akon","1:24–1:52","50mm · tilt up","He stops. Looks up at one lit window.","sodium",0],
+[22,112,5,"Pre-Chorus 2","1:52–2:06","85mm · static","She turns, as if she heard something.","cold",0],
+[23,117,5,"Pre-Chorus 2","1:52–2:06","50mm · handheld","Memory. A coat over her shoulders. Laughter.","warm",0],
+[24,122,4,"Pre-Chorus 2","1:52–2:06","100mm · static","Her hand closes over car keys.","cold",0],
+[25,126,6,"Chorus 2","2:06–2:34","32mm · push","<b>Frame A reprise.</b> She turns away mid-line.","cold",1],
+[26,132,5,"Chorus 2","2:06–2:34","35mm · tracking","She crosses the room. Gown in motion.","cold",0],
+[27,137,6,"Chorus 2","2:06–2:34","50mm · matched cut","Split world. Elevator and street, one framing.","mix",0],
+[28,143,5,"Chorus 2","2:06–2:34","50mm · static","Elevator doors close across her face.","cold",0],
+[29,148,6,"Chorus 2","2:06–2:34","24mm · crane down","She exits into the rain.","trans",0],
+[30,154,6,"Bridge","2:34–3:02","85mm · static","Car interior. Passing lights cross her face.","mix",0],
+[31,160,5,"Bridge","2:34–3:02","35mm · drift","POV through rain. The city smearing.","sodium",0],
+[32,165,5,"Bridge","2:34–3:02","100mm · static","Her hands in her lap. The ring again.","cold",0],
+[33,170,6,"Bridge","2:34–3:02","50mm · drift","The warmest memory. A door left open.","warm",0],
+[34,176,6,"Bridge","2:34–3:02","85mm · push","She looks up. Resolve arriving.","mix",0],
+[35,182,5,"Chorus 3","3:02–3:38","35mm · low static","Car stops. Feet to wet pavement.","sodium",0],
+[36,187,6,"Chorus 3","3:02–3:38","50mm · steadicam","She walks toward the building. She does not hurry.","sodium",0],
+[37,193,5,"Chorus 3","3:02–3:38","32mm · push","<b>Frame A inverted.</b> She sings — outside, in the rain.","mix",1],
+[38,198,5,"Chorus 3","3:02–3:38","50mm · static","Inside, he turns toward a sound.","warm",0],
+[39,203,5,"Chorus 3","3:02–3:38","85mm · held","<b>The hesitation.</b> Hand raised. She does not knock.","sodium",0],
+[40,208,5,"Chorus 3","3:02–3:38","100mm · static","Close on the eyes. The decision.","mix",0],
+[41,213,5,"Chorus 3","3:02–3:38","100mm · static","Her hand lands flat on the door.","mix",0],
+[42,218,5,"Outro","3:38–3:50","50mm · static","The door opens from inside. <b>Both palettes, one frame.</b>","res",0],
+[43,223,4,"Outro","3:38–3:50","85mm · static","Reverse. A silhouette in the warm doorway.","res",0],
+[44,227,3,"Outro","3:38–3:50","100mm · to black","Half warm, half cold. The smallest change. Cut to black.","res",0]];
+
+const PAL={
+ cold:{a:[11,15,20],b:[74,98,116],rain:.85,bok:[150,190,220],warm:0},
+ warm:{a:[58,36,21],b:[232,185,106],rain:0,bok:[240,200,140],warm:1},
+ sodium:{a:[27,58,92],b:[217,139,58],rain:.6,bok:[230,150,70],warm:.5},
+ trans:{a:[20,26,34],b:[190,140,80],rain:.5,bok:[210,170,120],warm:.6},
+ mix:{a:[24,32,46],b:[200,150,90],rain:.55,bok:[200,170,140],warm:.55},
+ res:{a:[40,30,26],b:[232,185,106],rain:.3,bok:[240,205,150],warm:.9}};
+
+const PRE=6, TOTAL=230, POST=7, END=PRE+TOTAL+POST;
+const atm=document.getElementById('atm'),X=atm.getContext('2d');
+const gc=document.getElementById('grain').getContext('2d');
+const $=id=>document.getElementById(id);
+
+// particles
+const rain=[],bok=[];
+for(let i=0;i<260;i++)rain.push({x:Math.random()*2100-100,y:Math.random()*1080,
+  l:18+Math.random()*46,s:9+Math.random()*13,o:.12+Math.random()*.4});
+for(let i=0;i<48;i++)bok.push({x:Math.random()*1920,y:Math.random()*1080,
+  r:16+Math.random()*74,o:.05+Math.random()*.16,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.1});
+
+let cur=null,curP='cold',mixP={a:[11,15,20],b:[74,98,116],rain:.85,bok:[150,190,220],warm:0};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const lerpC=(c1,c2,t)=>[lerp(c1[0],c2[0],t),lerp(c1[1],c2[1],t),lerp(c1[2],c2[2],t)];
+const fmt=s=>Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");
+
+function drawAtm(t,dt){
+  const p=mixP;
+  const g=X.createLinearGradient(0,0,1920*.7,1080);
+  g.addColorStop(0,`rgb(${p.a.map(Math.round).join(",")})`);
+  g.addColorStop(1,`rgb(${p.b.map(v=>Math.round(v*.42)).join(",")})`);
+  X.fillStyle=g;X.fillRect(0,0,1920,1080);
+
+  // light sweep
+  const sw=X.createRadialGradient(960+Math.sin(t*.18)*420,300,60,960,340,1150);
+  sw.addColorStop(0,`rgba(${p.b.map(Math.round).join(",")},${.22+p.warm*.2})`);
+  sw.addColorStop(1,"rgba(0,0,0,0)");
+  X.fillStyle=sw;X.fillRect(0,0,1920,1080);
+
+  // bokeh
+  bok.forEach(b=>{b.x+=b.vx;b.y+=b.vy;
+    if(b.x<-90)b.x=2010;if(b.x>2010)b.x=-90;if(b.y<-90)b.y=1170;if(b.y>1170)b.y=-90;
+    const rg=X.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);
+    rg.addColorStop(0,`rgba(${p.bok.map(Math.round).join(",")},${b.o})`);
+    rg.addColorStop(.6,`rgba(${p.bok.map(Math.round).join(",")},${b.o*.32})`);
+    rg.addColorStop(1,"rgba(0,0,0,0)");
+    X.fillStyle=rg;X.beginPath();X.arc(b.x,b.y,b.r,0,7);X.fill();});
+
+  // rain
+  if(p.rain>.02){X.lineWidth=1.15;
+    rain.forEach(r=>{r.y+=r.s*dt*62;r.x+=r.s*.26*dt*62;
+      if(r.y>1120){r.y=-70;r.x=Math.random()*2100-100;}
+      X.strokeStyle=`rgba(190,215,235,${r.o*p.rain})`;
+      X.beginPath();X.moveTo(r.x,r.y);X.lineTo(r.x-r.l*.26,r.y-r.l);X.stroke();});}
+}
+function drawGrain(){
+  const d=gc.createImageData(480,270),b=d.data;
+  for(let i=0;i<b.length;i+=4){const v=Math.random()*255;b[i]=b[i+1]=b[i+2]=v;b[i+3]=255;}
+  gc.putImageData(d,0,0);
+}
+function setShot(s){
+  $('num').textContent=String(s[0]).padStart(2,"0");
+  $('tc').textContent=fmt(s[1])+"  ·  "+s[2]+"s";
+  $('spec').textContent=s[5];
+  $('desc').innerHTML=s[6];
+  $('sec').textContent=s[3];
+  $('secr').textContent=s[4];
+  $('chip').style.opacity=s[8]?1:0;
+}
+// progress markers
+(function(){const bar=$('bar');SHOTS.forEach(s=>{const m=document.createElement('div');
+  m.className='mk'+(s[8]?' c':'');m.style.left=(s[1]/TOTAL*100)+'%';bar.appendChild(m);});})();
+
+let t0=null,last=0;
+function frame(ts){
+  if(t0===null)t0=ts;
+  const t=(ts-t0)/1000, dt=Math.min(.05,(ts-last)/1000||.016); last=ts;
+
+  // card visibility
+  $('c1').style.opacity = t<PRE-1.1 ? (t<.7?t/.7:1) : 0;
+  const postT=t-(PRE+TOTAL);
+  $('c2').style.opacity = postT>.6 ? 1 : 0;
+  const inMain = t>=PRE-.4 && t<PRE+TOTAL+.4;
+  $('mid').style.opacity=inMain?1:0;
+  $('top').style.opacity=inMain?1:0;
+  $('bot').style.opacity=inMain?1:0;
+
+  const st=Math.max(0,Math.min(TOTAL,t-PRE));
+  let s=SHOTS[0];
+  for(const q of SHOTS){if(st>=q[1])s=q;}
+  if(s!==cur){
+    if(cur&&cur[7]!==s[7]){$('flash').style.opacity=.13;
+      setTimeout(()=>{$('flash').style.transition='opacity .45s';$('flash').style.opacity=0;},40);}
+    cur=s;setShot(s);curP=s[7];
+  }
+  // ease palette
+  const tp=PAL[curP];
+  mixP={a:lerpC(mixP.a,tp.a,.045),b:lerpC(mixP.b,tp.b,.045),
+        rain:lerp(mixP.rain,tp.rain,.045),bok:lerpC(mixP.bok,tp.bok,.045),
+        warm:lerp(mixP.warm,tp.warm,.045)};
+
+  $('fill').style.width=(st/TOTAL*100)+'%';
+  $('cur').textContent=fmt(st);
+
+  drawAtm(t,dt);
+  if(Math.random()<.5)drawGrain();
+  if(t<END)requestAnimationFrame(frame);
+  else document.title="DONE";
+}
+drawGrain();requestAnimationFrame(frame);
+</script></body></html>

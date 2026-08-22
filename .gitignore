@@ -4,3 +4,10 @@ Thumbs.db
 __pycache__/
 *.pyc
 .env
+
+# render artifacts
+build/animatic/out/
+build/animatic/*.webm
+build/animatic/*.mp4
+build/animatic/frame-*.png
+build/animatic/render.log
