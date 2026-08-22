@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Like I Never Left — Production Book</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0B0B0D; --panel:#121216; --line:#26262C;
+  --gold:#C9A25E; --gold-dim:#8A6F3F;
+  --text:#DCDCE0; --mute:#9A9AA2;
+  --cold:#4A6274; --warm:#C8873F; --sodium:#D98B3A; --wet:#1B3A5C;
+}
+body{background:var(--bg);color:var(--text);
+  font:400 15px/1.6 "Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;padding:0 0 80px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+/* hierarchy: three sizes, two weights */
+h1{font:300 46px/1.1 Georgia,serif;color:var(--gold);letter-spacing:.06em}
+h2{font:600 13px/1 "Helvetica Neue",Arial,sans-serif;color:var(--gold);
+   letter-spacing:.22em;text-transform:uppercase;margin:0 0 18px}
+h3{font:600 16px/1.3 "Helvetica Neue",Arial,sans-serif;color:var(--text);margin:0 0 8px}
+p{margin:0 0 12px;max-width:74ch}
+.sub{color:var(--mute);font-size:14px}
+
+header{border-bottom:1px solid var(--line);padding:64px 0 40px;margin-bottom:44px}
+header .kicker{font:600 12px/1 sans-serif;letter-spacing:.28em;color:var(--gold-dim);
+  text-transform:uppercase;margin-bottom:20px}
+header .meta{margin-top:24px;color:var(--mute);font-size:14px;letter-spacing:.04em}
+
+section{margin-bottom:56px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:26px 28px;margin-bottom:16px}
+.flag{border-left:3px solid var(--gold);}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+ul{margin:0 0 12px 20px}li{margin-bottom:7px}
+strong{color:var(--gold);font-weight:600}
+code{font:13px/1.5 ui-monospace,Menlo,monospace;color:var(--gold);
+  background:#1A1A1F;padding:2px 6px;border-radius:2px}
+
+/* palette */
+.pal{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.sw{border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.sw .chip{height:64px}
+.sw .lab{padding:12px 14px;font-size:13px}
+.sw .lab b{display:block;color:var(--gold);font-weight:600;margin-bottom:3px}
+.sw .lab span{color:var(--mute);font:12px/1.4 ui-monospace,monospace}
+
+/* shot table */
+.sec-head{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--line);
+  padding:22px 0 10px;margin:34px 0 0}
+.sec-head .nm{font:600 15px/1 sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.sec-head .tc{font:12px/1 ui-monospace,monospace;color:var(--mute)}
+.sec-head .note{margin-left:auto;font-size:13px;color:var(--mute);font-style:italic}
+.chorus{border-bottom-color:var(--gold-dim)}
+
+table{width:100%;border-collapse:collapse;margin-top:4px}
+th{text-align:left;font:600 11px/1 sans-serif;letter-spacing:.16em;text-transform:uppercase;
+   color:var(--gold-dim);padding:14px 10px 10px;border-bottom:1px solid var(--line)}
+td{padding:14px 10px;border-bottom:1px solid #1C1C21;vertical-align:top;font-size:14px}
+td.id{font:600 13px/1.4 ui-monospace,monospace;color:var(--gold);white-space:nowrap}
+td.spec{font:12px/1.6 ui-monospace,monospace;color:var(--mute);white-space:nowrap}
+td.prompt{font:13px/1.55 ui-monospace,monospace;color:#B9B9C0}
+.tag{display:inline-block;font:600 10px/1 sans-serif;letter-spacing:.1em;
+  padding:4px 7px;border-radius:2px;margin-top:7px;text-transform:uppercase}
+.t-cold{background:#16232B;color:#7FA8BF}
+.t-warm{background:#2A1C0F;color:#D9A15F}
+.t-sod{background:#2B1D0E;color:#E0954A}
+.t-mix{background:#231B24;color:#C0A0C8}
+.tbl-scroll{overflow-x:auto}
+
+.ck{list-style:none;margin-left:0}
+.ck li{padding-left:26px;position:relative}
+.ck li:before{content:"";position:absolute;left:0;top:6px;width:11px;height:11px;
+  border:1px solid var(--gold-dim);border-radius:2px}
+.num{list-style:none;margin-left:0;counter-reset:s}
+.num li{counter-increment:s;padding-left:36px;position:relative;margin-bottom:12px}
+.num li:before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;
+  border:1px solid var(--gold-dim);color:var(--gold);border-radius:50%;
+  font:600 12px/23px sans-serif;text-align:center}
+footer{border-top:1px solid var(--line);margin-top:60px;padding-top:26px;color:var(--mute);font-size:13px}
+@media print{body{background:#fff;color:#111}.panel{background:#fafafa}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Production Book &nbsp;·&nbsp; Revision 2</div>
+  <h1>Like I Never Left</h1>
+  <p class="sub" style="font-size:17px;letter-spacing:.16em;margin-top:10px">
+    WHITNEY HOUSTON ft. AKON &nbsp;—&nbsp; CONCEPT TREATMENT &amp; SHOT LIST</p>
+  <div class="meta">
+    RUNTIME 3:50 &nbsp;·&nbsp; 44 SHOTS &nbsp;·&nbsp; 4K 16:9 @ 24fps &nbsp;·&nbsp; AI-GENERATED
+  </div>
+</header>
+
+<section>
+  <h2>Before Anything Is Generated</h2>
+  <div class="panel flag">
+    <h3>Clearance gates — all three must close first</h3>
+    <p>This video is a synthetic performance of a real, deceased artist. These are not
+       post-production formalities; nothing should be rendered until they are signed.</p>
+    <ul>
+      <li><strong>Estate approval</strong> — written consent for the digital likeness from the
+          Houston estate. Post-mortem right of publicity is enforced in the relevant
+          jurisdictions and this use is squarely within it.</li>
+      <li><strong>Master recording license</strong> — sync rights for the 2009 recording, plus
+          Akon's likeness consent as a living artist.</li>
+      <li><strong>Synthetic media disclosure</strong> — a visible AI-generation card at head
+          or tail, plus platform-level synthetic content flags on upload. Required by
+          every major distributor. Design it in; don't bolt it on.</li>
+    </ul>
+    <p class="sub">If any gate cannot close, this book still works as a live-action treatment
+       with a performer, or as an abstract//typographic piece with no likeness at all.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Concept</h2>
+  <div class="grid2">
+    <div class="panel">
+      <h3>The story</h3>
+      <p>A woman alone in a high room above a raining city. She remembers. She decides.
+         She goes back. She hesitates at the door — and the door opens before she knocks.</p>
+      <p>The revision from the previous board: <strong>the arc no longer rises unbroken.</strong>
+         A doubt beat sits immediately before arrival. Two seconds of not-knocking is what
+         makes the ending land.</p>
+    </div>
+    <div class="panel">
+      <h3>The ending, changed</h3>
+      <p>We no longer show a reunion. We end on the door opening, warm light crossing her
+         face, and cut to black on the final vocal.</p>
+      <p>Two reasons. It is the stronger read — the title is a question the audience should
+         close themselves. And it removes the single hardest shot to generate convincingly:
+         a sustained two-person embrace with faces in contact.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Structure — The Chorus Is The Spine</h2>
+  <div class="panel">
+    <p>The previous board had seven narrative beats and no choruses. A music video is a
+       timeline before it is a story. Below, the story sits <em>inside</em> the song's sections.</p>
+    <p><strong>The rule:</strong> one recurring image — she sings to camera at the rain-streaked
+       window — returns at every chorus, and changes each time. Chorus 1 she is still.
+       Chorus 2 she is already leaving mid-line. Chorus 3 the frame is inverted: same
+       composition, but she is outside in the rain. That inversion is the whole video in
+       one cut.</p>
+    <p class="sub">Timecodes below are a working template. Conform them to your actual master
+       before generating — every shot length depends on it.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Colour Design</h2>
+  <div class="panel">
+    <p>Four palettes, each assigned to a story state. Colour carries the narrative rather
+       than decorating it — and the final frame is the only one where two palettes coexist.</p>
+  </div>
+  <div class="pal">
+    <div class="sw"><div class="chip" style="background:linear-gradient(135deg,#0B0F14,#4A6274)"></div>
+      <div class="lab"><b>COLD PRESENT</b><span>#0B0F14 → #4A6274</span>
+      <span style="color:#9A9AA2;font-family:inherit">Desaturated, crushed blacks, high contrast. Her world now.</span></div></div>
+    <div class="sw"><div class="chip" style="background:linear-gradient(135deg,#3A2415,#E8B96A)"></div>
+      <div class="lab"><b>WARM MEMORY</b><span>#3A2415 → #E8B96A</span>
+      <span style="color:#9A9AA2;font-family:inherit">Lifted blacks, soft falloff, amber key. Every flashback.</span></div></div>
+    <div class="sw"><div class="chip" style="background:linear-gradient(135deg,#1B3A5C,#D98B3A)"></div>
+      <div class="lab"><b>JOURNEY / SODIUM</b><span>#1B3A5C + #D98B3A</span>
+      <span style="color:#9A9AA2;font-family:inherit">Street vapour against wet blue. Akon's world, and her drive.</span></div></div>
+    <div class="sw"><div class="chip" style="background:linear-gradient(90deg,#1B3A5C 50%,#E8B96A 50%)"></div>
+      <div class="lab"><b>RESOLUTION</b><span>both, one frame</span>
+      <span style="color:#9A9AA2;font-family:inherit">Reserved. Used only in shots 42–44.</span></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Identity Lock Protocol</h2>
+  <div class="panel">
+    <p>Drift across shots is the primary failure mode of this approach and the reason most
+       AI music videos read as fake. Treat identity as an asset to be version-controlled.</p>
+    <ol class="num">
+      <li><strong>Build the reference set first.</strong> 8–12 stills, locked: front, 3/4 left,
+          3/4 right, profile, plus two lit exactly like the COLD key and two like the WARM key.
+          Nothing is generated until this set is approved and frozen.</li>
+      <li><strong>One seed family per palette.</strong> Do not re-roll seeds across a section —
+          drift compounds invisibly and only shows in the edit.</li>
+      <li><strong>Face pass on every shot.</strong> Re-reference against the locked set after
+          generation, before lip sync.</li>
+      <li><strong>Reject, don't fix.</strong> If a clip's identity is off, regenerate. Patching
+          a drifted face in post costs more than a re-roll and never fully works.</li>
+      <li><strong>Continuity ledger.</strong> Track per shot: earring, ring, hair part, gown
+          strap position. These drift silently and break the cut.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>Shot List &amp; Generation Prompts</h2>
+  <div class="panel">
+    <p>44 shots, average 5.2s. Prompts are written for text-to-video with an image reference
+       attached; keep the reference doing the identity work and let the prompt carry
+       light, lens and motion.</p>
+  </div>
+
+<div class="tbl-scroll">
+
+<div class="sec-head"><span class="nm">Intro</span><span class="tc">0:00 – 0:14</span><span class="note">Establish the cold. She is not revealed yet.</span></div>
+<table>
+<tr><th style="width:52px">#</th><th style="width:118px">Time / Len</th><th style="width:150px">Lens / Move</th><th>Shot</th><th style="width:34%">Generation prompt</th></tr>
+<tr><td class="id">01</td><td class="spec">0:00 · 4s</td><td class="spec">85mm<br>slow push</td>
+<td>Exterior, high-rise window seen from outside. Rain on glass. A figure barely legible within.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Exterior night, rain streaming down a high-rise window, a blurred figure inside, cold blue city light, slow push in, anamorphic, shallow focus</td></tr>
+<tr><td class="id">02</td><td class="spec">0:04 · 5s</td><td class="spec">35mm<br>drift left</td>
+<td>Interior. Rain shadows crawl across an empty room. Chandelier soft behind.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Empty luxury apartment at night, rain shadows moving across marble floor, out-of-focus chandelier, cold blue key, slow lateral camera drift</td></tr>
+<tr><td class="id">03</td><td class="spec">0:09 · 5s</td><td class="spec">50mm<br>rack focus</td>
+<td>Her reflection in the dark glass, not yet turned to us.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Woman's reflection in a dark rain-covered window, facing away, elegant black gown, rack focus from raindrops to reflection, cold cinematic</td></tr>
+</table>
+
+<div class="sec-head"><span class="nm">Verse 1 — Whitney</span><span class="tc">0:14 – 0:42</span><span class="note">First sync. Alone in a room too large.</span></div>
+<table>
+<tr><th style="width:52px">#</th><th style="width:118px">Time / Len</th><th style="width:150px">Lens / Move</th><th>Shot</th><th style="width:34%">Generation prompt</th></tr>
+<tr><td class="id">04</td><td class="spec">0:14 · 6s</td><td class="spec">85mm<br>static</td>
+<td>She turns to camera. Medium close. First vocal.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Elegant woman in black one-shoulder gown turns slowly toward camera, medium close-up, cold blue window light, subtle warm rim, static frame, filmic</td></tr>
+<tr><td class="id">05</td><td class="spec">0:20 · 5s</td><td class="spec">24mm<br>static</td>
+<td>Wide. She is small in the room; one warm lamp is the only heat in frame.<span class="tag t-cold">Cold + accent</span></td>
+<td class="prompt">Wide shot, woman alone in vast dark penthouse, single warm table lamp, floor-to-ceiling city windows, cold blue ambience, symmetrical composition</td></tr>
+<tr><td class="id">06</td><td class="spec">0:25 · 5s</td><td class="spec">100mm<br>macro</td>
+<td>Hands on the window ledge. A ring. City bokeh beyond.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Extreme close-up of hands resting on a window ledge, ring on finger, city bokeh beyond glass, cold light, very shallow depth of field</td></tr>
+<tr><td class="id">07</td><td class="spec">0:30 · 6s</td><td class="spec">85mm<br>imperceptible push</td>
+<td>Close on eyes. Sync.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Close-up on a woman's eyes singing, cold blue key light, single catchlight, almost imperceptible push in, high detail skin texture, cinematic</td></tr>
+<tr><td class="id">08</td><td class="spec">0:36 · 6s</td><td class="spec">35mm<br>tracking</td>
+<td>She walks from the window; chandelier passes overhead.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Tracking shot following a woman in a black gown walking through a dark penthouse, crystal chandelier passing overhead, cold blue light, smooth dolly</td></tr>
+</table>
+
+<div class="sec-head"><span class="nm">Pre-Chorus</span><span class="tc">0:42 – 0:56</span><span class="note">The warm palette bleeds in for the first time.</span></div>
+<table>
+<tr><th style="width:52px">#</th><th style="width:118px">Time / Len</th><th style="width:150px">Lens / Move</th><th>Shot</th><th style="width:34%">Generation prompt</th></tr>
+<tr><td class="id">09</td><td class="spec">0:42 · 5s</td><td class="spec">35mm<br>static</td>
+<td>She crosses a doorway. Amber spills from the next room.<span class="tag t-mix">Transition</span></td>
+<td class="prompt">Woman crosses a doorway in silhouette, warm amber light spilling from the room beyond into a cold blue hallway, static frame, cinematic contrast</td></tr>
+<tr><td class="id">10</td><td class="spec">0:47 · 4s</td><td class="spec">85mm<br>flash insert</td>
+<td>First memory. Six frames only. Two hands almost touching.<span class="tag t-warm">Warm</span></td>
+<td class="prompt">Extreme close-up, two hands almost touching, warm amber golden hour light, soft focus, intimate, film grain</td></tr>
+<tr><td class="id">11</td><td class="spec">0:51 · 5s</td><td class="spec">85mm<br>static</td>
+<td>Back to her, closer. The memory has landed on her face.<span class="tag t-cold">Cold + warm edge</span></td>
+<td class="prompt">Close-up of a woman's face, cold blue key with a warm amber edge light on one cheek, emotion held back, static, shallow focus</td></tr>
+</table>
+
+<div class="sec-head chorus"><span class="nm">Chorus 1 — Spine A</span><span class="tc">0:56 – 1:24</span><span class="note">Establish the returning image. She is still.</span></div>
+<table>
+<tr><th style="width:52px">#</th><th style="width:118px">Time / Len</th><th style="width:150px">Lens / Move</th><th>Shot</th><th style="width:34%">Generation prompt</th></tr>
+<tr><td class="id">12</td><td class="spec">0:56 · 6s</td><td class="spec">32mm<br>slow push</td>
+<td><strong>CHORUS FRAME A.</strong> Wide, singing to camera, rain glass, city.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Wide shot, woman in black gown singing directly to camera before a rain-streaked floor-to-ceiling window, night city beyond, cold blue, slow push in</td></tr>
+<tr><td class="id">13</td><td class="spec">1:02 · 5s</td><td class="spec">50mm<br>slow arc L</td>
+<td><strong>FRAME B.</strong> Medium, three-quarter.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Medium three-quarter shot of a woman singing, slow arcing camera move around her, rain window behind, cold cinematic light, smooth motion</td></tr>
+<tr><td class="id">14</td><td class="spec">1:07 · 6s</td><td class="spec">85mm<br>static</td>
+<td>Memory: two silhouettes, foreheads nearly touching.<span class="tag t-warm">Warm</span></td>
+<td class="prompt">Two silhouettes close together, foreheads almost touching, warm amber backlight, soft haze, intimate, static frame, filmic grain</td></tr>
+<tr><td class="id">15</td><td class="spec">1:13 · 5s</td><td class="spec">85mm<br>static</td>
+<td><strong>FRAME C.</strong> Close, sync, a tear that does not fall.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Close-up, woman singing, eyes glistening, tear not falling, cold blue key, single soft catchlight, extremely detailed, static</td></tr>
+<tr><td class="id">16</td><td class="spec">1:18 · 6s</td><td class="spec">24mm<br>pull back</td>
+<td>From behind her. The city fills frame. She is small.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Camera pulls back from behind a woman standing at a huge window, night city filling the frame, she becomes small, cold blue, slow dolly out</td></tr>
+</table>
+
+<div class="sec-head"><span class="nm">Verse 2 — Akon</span><span class="tc">1:24 – 1:52</span><span class="note">Different world, same story. Street level throughout.</span></div>
+<table>
+<tr><th style="width:52px">#</th><th style="width:118px">Time / Len</th><th style="width:150px">Lens / Move</th><th>Shot</th><th style="width:34%">Generation prompt</th></tr>
+<tr><td class="id">17</td><td class="spec">1:24 · 5s</td><td class="spec">35mm<br>static</td>
+<td>Wet street at night. He stands under a streetlight.<span class="tag t-sod">Sodium</span></td>
+<td class="prompt">Man in a dark leather jacket standing under a streetlight on a wet night street, sodium orange light against deep blue, reflections on asphalt, static</td></tr>
+<tr><td class="id">18</td><td class="spec">1:29 · 5s</td><td class="spec">50mm<br>slow push</td>
+<td>He sings to camera. Breath visible.<span class="tag t-sod">Sodium</span></td>
+<td class="prompt">Medium close-up, man singing to camera at night, visible breath in cold air, sodium streetlight key, shallow depth, slow push in, cinematic</td></tr>
+<tr><td class="id">19</td><td class="spec">1:34 · 5s</td><td class="spec">85mm<br>static</td>
+<td>Traffic streaks the foreground; he holds still behind.<span class="tag t-sod">Sodium</span></td>
+<td class="prompt">Compressed telephoto shot, car headlights streaking through foreground, man standing motionless in background at night, orange and blue, static camera</td></tr>
+<tr><td class="id">20</td><td class="spec">1:39 · 6s</td><td class="spec">35mm<br>lateral track</td>
+<td>He walks. Storefronts slide past.<span class="tag t-sod">Sodium</span></td>
+<td class="prompt">Lateral tracking shot alongside a man walking down a wet city street at night, lit storefronts sliding past, sodium and neon, smooth steady motion</td></tr>
+<tr><td class="id">21</td><td class="spec">1:45 · 7s</td><td class="spec">50mm<br>tilt up</td>
+<td>He stops. Looks up at one lit window.<span class="tag t-sod">Sodium → warm</span></td>
+<td class="prompt">Man stops on a night street and looks upward, camera tilts up to a single warmly lit apartment window high above, cold blue sky, cinematic</td></tr>
+</table>
+
+<div class="sec-head"><span class="nm">Pre-Chorus 2</span><span class="tc">1:52 – 2:06</span><span class="note">The decision forms.</span></div>
+<table>
+<tr><th style="width:52px">#</th><th style="width:118px">Time / Len</th><th style="width:150px">Lens / Move</th><th>Shot</th><th style="width:34%">Generation prompt</th></tr>
+<tr><td class="id">22</td><td class="spec">1:52 · 5s</td><td class="spec">85mm<br>static</td>
+<td>She turns, as if she heard something.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Woman turns her head sharply as if hearing something, close-up, cold blue window light, dark interior, static frame, filmic</td></tr>
+<tr><td class="id">23</td><td class="spec">1:57 · 5s</td><td class="spec">50mm<br>handheld</td>
+<td>Memory: a coat placed over her shoulders in a doorway. Laughter.<span class="tag t-warm">Warm</span></td>
+<td class="prompt">Warm memory, a coat being placed over a woman's shoulders in a doorway, both laughing, golden amber light, soft handheld, nostalgic film grain</td></tr>
+<tr><td class="id">24</td><td class="spec">2:02 · 4s</td><td class="spec">100mm<br>static</td>
+<td>Her hand closes over a set of car keys.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Extreme close-up, a woman's hand closing around car keys on a marble surface, cold blue light, very shallow focus, decisive</td></tr>
+</table>
+
+<div class="sec-head chorus"><span class="nm">Chorus 2 — Spine B</span><span class="tc">2:06 – 2:34</span><span class="note">Same frames, but she is already leaving.</span></div>
+<table>
+<tr><th style="width:52px">#</th><th style="width:118px">Time / Len</th><th style="width:150px">Lens / Move</th><th>Shot</th><th style="width:34%">Generation prompt</th></tr>
+<tr><td class="id">25</td><td class="spec">2:06 · 6s</td><td class="spec">32mm<br>push</td>
+<td><strong>FRAME A REPRISE</strong> — identical setup, but she turns away mid-line.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Same wide composition, woman singing at rain window, then turning and walking away mid-phrase, cold blue, slow push in, continuous take</td></tr>
+<tr><td class="id">26</td><td class="spec">2:12 · 5s</td><td class="spec">35mm<br>tracking</td>
+<td>She crosses the room quickly; gown in motion.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Tracking shot, woman in black gown walking quickly through a dark penthouse, fabric moving, motivated cold light, smooth dolly, cinematic urgency</td></tr>
+<tr><td class="id">27</td><td class="spec">2:17 · 6s</td><td class="spec">50mm<br>matched cuts</td>
+<td>Split world: her in the elevator / him on the street, matched framing.<span class="tag t-mix">Cold | Sodium</span></td>
+<td class="prompt">Matched framing intercut, woman in an elevator under cold light and man on a street under sodium light, identical composition and eye line, static</td></tr>
+<tr><td class="id">28</td><td class="spec">2:23 · 5s</td><td class="spec">50mm<br>static</td>
+<td>Elevator doors close across her face.<span class="tag t-cold">Cold</span></td>
+<td class="prompt">Elevator doors sliding closed across a woman's face, cold overhead light, reflective metal, static frame, high contrast, cinematic</td></tr>
+<tr><td class="id">29</td><td class="spec">2:28 · 6s</td><td class="spec">24mm<br>crane down</td>
+<td>She exits into the rain. Doorman. City.<span class="tag t-mix">Cold → Sodium</span></td>
+<td class="prompt">Crane down as a woman in a black gown exits a lobby into heavy night rain, doorman with umbrella, wet street, cold blue shifting to sodium orange</td></tr>
+</table>
+
+<div class="sec-head"><span class="nm">Bridge — The Journey</span><span class="tc">2:34 – 3:02</span><span class="note">The doubt beat lives here.</span></div>
+<table>
+<tr><th style="width:52px">#</th><th style="width:118px">Time / Len</th><th style="width:150px">Lens / Move</th><th>Shot</th><th style="width:34%">Generation prompt</th></tr>
+<tr><td class="id">30</td><td class="spec">2:34 · 6s</td><td class="spec">85mm<br>static</td>
+<td>Car interior. Passing lights cross her face.<span class="tag t-mix">Sodium on cold</span></td>
+<td class="prompt">Interior of a moving car at night, woman's face lit by passing streetlights sweeping across, rain on the window, sodium streaks over cool skin, static</td></tr>
+<tr><td class="id">31</td><td class="spec">2:40 · 5s</td><td class="spec">35mm<br>handheld drift</td>
+<td>POV through the rain window, the city smearing.<span class="tag t-sod">Sodium</span></td>
+<td class="prompt">POV through a rain-covered car window, city lights smearing into bokeh, handheld drift, out of focus, night, orange and blue</td></tr>
+<tr><td class="id">32</td><td class="spec">2:45 · 5s</td><td class="spec">100mm<br>static</td>
+<td>Her hands in her lap. The ring again.<span class="tag t-cold">Neutral</span></td>
+<td class="prompt">Close-up of hands folded in a lap, ring visible, low ambient light in a moving car, very shallow depth of field, quiet, static</td></tr>
+<tr><td class="id">33</td><td class="spec">2:50 · 6s</td><td class="spec">50mm<br>slow drift</td>
+<td>The warmest memory. A room, a door left open.<span class="tag t-warm">Warm</span></td>
+<td class="prompt">Warm golden memory, a sunlit room with a door left open, dust in the light, deeply nostalgic amber tones, slow camera drift, heavy film grain</td></tr>
+<tr><td class="id">34</td><td class="spec">2:56 · 6s</td><td class="spec">85mm<br>slow push</td>
+<td>She looks up. Resolve arriving.<span class="tag t-mix">Warm edge on cold</span></td>
+<td class="prompt">Close-up, woman lifts her eyes with growing resolve, cold key light with warm amber edge, slow push in, subtle emotional shift, cinematic</td></tr>
+</table>
+
+<div class="sec-head chorus"><span class="nm">Chorus 3 — Spine Inverted</span><span class="tc">3:02 – 3:38</span><span class="note">The frame flips: she sings outside, in the rain.</span></div>
+<table>
+<tr><th style="width:52px">#</th><th style="width:118px">Time / Len</th><th style="width:150px">Lens / Move</th><th>Shot</th><th style="width:34%">Generation prompt</th></tr>
+<tr><td class="id">35</td><td class="spec">3:02 · 5s</td><td class="spec">35mm<br>static low</td>
+<td>Car stops. Door opens. Feet to wet pavement.<span class="tag t-sod">Sodium</span></td>
+<td class="prompt">Low static shot, car door opening at night, a woman's heels stepping onto wet reflective pavement, sodium streetlight, rain, cinematic</td></tr>
+<tr><td class="id">36</td><td class="spec">3:07 · 6s</td><td class="spec">50mm<br>steadicam behind</td>
+<td>She walks toward the building. She does not hurry.<span class="tag t-sod">Sodium</span></td>
+<td class="prompt">Steadicam following behind a woman in a black gown walking unhurried through night rain toward a lit building entrance, sodium and blue, smooth</td></tr>
+<tr><td class="id">37</td><td class="spec">3:13 · 5s</td><td class="spec">32mm<br>push</td>
+<td><strong>FRAME A INVERTED.</strong> Same composition — but she is outside, rain on her, city behind.<span class="tag t-mix">Sodium + cold</span></td>
+<td class="prompt">Wide shot matching an earlier interior composition, but the woman now stands outdoors in the rain singing to camera, city lights behind, slow push in</td></tr>
+<tr><td class="id">38</td><td class="spec">3:18 · 5s</td><td class="spec">50mm<br>static</td>
+<td>Inside, he turns toward a sound.<span class="tag t-warm">Warm</span></td>
+<td class="prompt">Man inside a warmly lit apartment turning his head toward a sound at the door, amber lamplight, static frame, shallow focus, cinematic</td></tr>
+<tr><td class="id">39</td><td class="spec">3:23 · 5s</td><td class="spec">85mm<br>static — hold</td>
+<td><strong>THE HESITATION.</strong> Hand raised at the door. She does not knock.<span class="tag t-sod">Sodium</span></td>
+<td class="prompt">Woman standing at a door with her hand raised to knock, holding still, not knocking, rain, warm light seam beneath the door, static held frame</td></tr>
+<tr><td class="id">40</td><td class="spec">3:28 · 5s</td><td class="spec">100mm<br>static</td>
+<td>Close on her eyes. The decision.<span class="tag t-mix">Sodium + under-door warm</span></td>
+<td class="prompt">Extreme close-up on a woman's eyes deciding, cool rain light above and warm amber glow from below, single catchlight, static, extremely detailed</td></tr>
+<tr><td class="id">41</td><td class="spec">3:33 · 5s</td><td class="spec">100mm<br>static</td>
+<td>Her hand lands flat on the door. The light seam widens.<span class="tag t-mix">Sodium → warm</span></td>
+<td class="prompt">Close-up of a hand resting flat against a door, warm light seam at the edge widening slowly, cool rain light on skin, static, cinematic</td></tr>
+</table>
+
+<div class="sec-head"><span class="nm">Outro</span><span class="tc">3:38 – 3:50</span><span class="note">End open. Cut to black on the final vocal.</span></div>
+<table>
+<tr><th style="width:52px">#</th><th style="width:118px">Time / Len</th><th style="width:150px">Lens / Move</th><th>Shot</th><th style="width:34%">Generation prompt</th></tr>
+<tr><td class="id">42</td><td class="spec">3:38 · 5s</td><td class="spec">50mm<br>static</td>
+<td>The door opens from inside — before she knocks. <strong>Both palettes, one frame.</strong><span class="tag t-mix">Resolution</span></td>
+<td class="prompt">A door opens from the inside, warm amber light floods across a woman's face while cold blue rain falls behind her, both colours in one frame, static</td></tr>
+<tr><td class="id">43</td><td class="spec">3:43 · 4s</td><td class="spec">85mm<br>static</td>
+<td>Reverse, over her shoulder. A silhouette in the warm doorway — face unresolved.<span class="tag t-mix">Resolution</span></td>
+<td class="prompt">Over-the-shoulder reverse shot, a figure standing in a warm lit doorway in silhouette, face not visible, backlit amber, static, cinematic</td></tr>
+<tr><td class="id">44</td><td class="spec">3:47 · 3s</td><td class="spec">100mm<br>static → black</td>
+<td>Her face, half warm half cold. The smallest change in expression. Cut to black.<span class="tag t-mix">Resolution</span></td>
+<td class="prompt">Extreme close-up of a woman's face split between warm amber light and cold blue rain light, the faintest shift in expression, static, hold, then black</td></tr>
+</table>
+
+</div>
+</section>
+
+<section>
+  <h2>Pipeline — Order Matters</h2>
+  <div class="panel">
+    <ol class="num">
+      <li><strong>Lock references</strong> — identity set approved and frozen. Nothing before this.</li>
+      <li><strong>Generate at base resolution.</strong> Do not upscale yet.</li>
+      <li><strong>Conform to the master.</strong> Cut the whole video at base res against the real
+          audio. Find the edit before you spend a single upscale credit.</li>
+      <li><strong>Lip sync</strong> — at base res, on locked picture only. Syncing shots that later
+          get trimmed is wasted money.</li>
+      <li><strong>Upscale to 4K</strong> — only the shots that survived the edit.</li>
+      <li><strong>Retime and motion.</strong> Conform everything to 24fps. Generated clips arrive
+          at mixed cadences; fix with optical flow, not frame duplication.</li>
+      <li><strong>Grade in Resolve</strong> — palette assignment per the colour design, then
+          halation, gate weave and 35mm grain last.</li>
+      <li><strong>Disclosure card</strong> and delivery encodes.</li>
+    </ol>
+    <p class="sub" style="margin-top:16px"><strong>The expensive mistake:</strong> upscaling before
+       the edit is locked. Sync before upscale, edit before sync.</p>
+  </div>
+</section>
+
+<section>
+  <h2>QC — Per-Shot Rejection Checklist</h2>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Identity &amp; anatomy</h3>
+      <ul class="ck">
+        <li>Face matches locked reference under this shot's key light</li>
+        <li>Hands: five fingers, correct scale, no morph across the clip</li>
+        <li>Teeth stable through the sync — no count or shape shift</li>
+        <li>Ears and earrings present, symmetric, not flickering</li>
+        <li>Hair part on the correct side</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Continuity &amp; motion</h3>
+      <ul class="ck">
+        <li>Ring on the same hand as shots 06 / 32</li>
+        <li>Gown strap on the same shoulder throughout</li>
+        <li>Background extras don't walk through geometry</li>
+        <li>Rain direction consistent across the cut</li>
+        <li>Reflections behave — glass, wet asphalt, elevator metal</li>
+        <li>No AI slow-motion drift; movement reads at 24fps</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Deliverables</h2>
+  <div class="panel">
+    <div class="grid2">
+      <div>
+        <h3>Masters</h3>
+        <ul>
+          <li>4K UHD 3840×2160, 16:9, 24fps</li>
+          <li>ProRes 422 HQ, Rec.709 · graded master</li>
+          <li>H.264 40 Mbps · distribution</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Cutdowns</h3>
+        <ul>
+          <li>9:16 vertical, 2160×3840 — reframe, do not letterbox</li>
+          <li>1:1 square, 15s and 30s teasers</li>
+          <li>Still frame pack for press — shots 12, 21, 37, 42</li>
+        </ul>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:18px">Shots 12, 37 and 42 are composed with vertical
+       reframing in mind — keep headroom. The rest will need attention in the 9:16 pass.</p>
+  </div>
+</section>
+
+<footer>
+  Revision 2 · Structural pass: chorus spine added, arc broken with a doubt beat,
+  ending moved earlier, palette assigned to narrative state, identity-lock protocol
+  and clearance gates added.<br>
+  Concept document only — no footage generated. Execution is gated on estate approval,
+  master licence and synthetic-media disclosure.
+</footer>
+
+</div>
+</body>
+</html>
