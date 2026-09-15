@@ -826,6 +826,18 @@ const projects = [
     colors:["#3A2417","#C65A20"]
   },
   {
+    title:"Red & Yellow Education Analytics",
+    category:"Education CRM Analytics",
+    filter:"Analytics",
+    summary:"CRM analytics platform connecting marketing, Salesforce, admissions and learner support. Salesforce and Apache NiFi feed a dbt medallion warehouse that builds identically on DuckDB and Microsoft Fabric, with Power BI reporting and early-risk models. People, spend and outcomes are synthetic.",
+    metrics:["11.5M rows","87/87 dbt on Fabric","Live Salesforce extract"],
+    stack:["Salesforce","Apache NiFi","dbt","Microsoft Fabric","DuckDB","Power BI","Python","SQL"],
+    git:"",
+    live:"https://anthonyapollis.github.io/education-analytics/",
+    liveLabel:"Project Page",
+    colors:["#F52635","#FFB71B"]
+  },
+  {
     title:"Tshiamiso Claimant Intelligence",
     category:"Claims + Governance",
     filter:"Analytics",
@@ -950,7 +962,7 @@ function renderProjects(){
           <div class="stack-row">${p.stack.map(s => `<span class="stack">${s}</span>`).join("")}</div>
         </div>
         <div class="actions">
-          <a class="link-btn primary" href="${p.git}" target="_blank" rel="noopener">GitHub Repo</a>
+          ${p.git ? `<a class="link-btn primary" href="${p.git}" target="_blank" rel="noopener">GitHub Repo</a>` : ""}
           ${liveButton}
           ${p.recon ? `<a class="link-btn recon" href="${p.recon}" target="_blank" rel="noopener">⚖️ Reconciliation</a>` : ""}
           ${p.bi ? `<a class="link-btn recon" href="${p.bi}" target="_blank" rel="noopener">📊 Self-Serve BI</a>` : ""}
